@@ -1,0 +1,24 @@
+{
+  "generator-jhipster": {
+    "baseName": "CMPE295",
+    "packageName": "edu.sjsu.cmpe295",
+    "packageFolder": "edu/sjsu/cmpe295",
+    "authenticationType": "xauth",
+    "hibernateCache": "ehcache",
+    "clusteredHttpSession": "no",
+    "websocket": "no",
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": "no",
+    "useSass": false,
+    "buildTool": "maven",
+    "frontendBuilder": "grunt",
+    "enableTranslation": true,
+    "enableSocialSignIn": false,
+    "rememberMeKey": "a9edc861e6e560152717ae2b34addfb204eb77ad",
+    "testFrameworks": [
+      "gatling"
+    ]
+  }
+}
