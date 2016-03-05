@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('cMPE295App')
+angular.module('cmpe295App')
     .controller('MainController', function ($scope, Principal) {
         Principal.identity().then(function(account) {
             $scope.account = account;

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('cMPE295App')
+angular.module('cmpe295App')
     .factory('Principal', function Principal($q, Account) {
         var _identity,
             _authenticated = false;

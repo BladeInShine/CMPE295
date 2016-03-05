@@ -1,7 +1,7 @@
 /* globals $ */
 'use strict';
 
-angular.module('cMPE295App')
+angular.module('cmpe295App')
     .directive('minbytes', function ($q) {
         function endsWith(suffix, str) {
             return str.indexOf(suffix, str.length - suffix.length) !== -1;

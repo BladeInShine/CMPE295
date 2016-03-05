@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('cMPE295App')
+angular.module('cmpe295App')
     .factory('LogsService', function ($resource) {
         return $resource('api/logs', {}, {
             'findAll': { method: 'GET', isArray: true},

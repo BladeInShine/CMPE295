@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('cMPE295App')
+angular.module('cmpe295App')
     .config(function ($stateProvider) {
         $stateProvider
             .state('user-management', {
@@ -25,7 +25,7 @@ angular.module('cMPE295App')
             })
             .state('user-management-detail', {
                 parent: 'admin',
-                url: '/user-management/:login',
+                url: '/user/:login',
                 data: {
                     authorities: ['ROLE_ADMIN'],
                     pageTitle: 'user-management.detail.title'
@@ -49,8 +49,8 @@ angular.module('cMPE295App')
                 data: {
                     authorities: ['ROLE_ADMIN'],
                 },
-                onEnter: ['$stateParams', '$state', '$modal', function($stateParams, $state, $modal) {
-                    $modal.open({
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
                         templateUrl: 'scripts/app/admin/user-management/user-management-dialog.html',
                         controller: 'UserManagementDialogController',
                         size: 'lg',
@@ -58,7 +58,7 @@ angular.module('cMPE295App')
                             entity: function () {
                                 return {
                                     id: null, login: null, firstName: null, lastName: null, email: null,
-                                    activated: null, langKey: null, createdBy: null, createdDate: null,
+                                    activated: true, langKey: null, createdBy: null, createdDate: null,
                                     lastModifiedBy: null, lastModifiedDate: null, resetDate: null,
                                     resetKey: null, authorities: null
                                 };
@@ -77,11 +77,34 @@ angular.module('cMPE295App')
                 data: {
                     authorities: ['ROLE_ADMIN'],
                 },
-                onEnter: ['$stateParams', '$state', '$modal', function($stateParams, $state, $modal) {
-                    $modal.open({
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
                         templateUrl: 'scripts/app/admin/user-management/user-management-dialog.html',
                         controller: 'UserManagementDialogController',
                         size: 'lg',
+                        resolve: {
+                            entity: ['User', function(User) {
+                                return User.get({login : $stateParams.login});
+                            }]
+                        }
+                    }).result.then(function(result) {
+                        $state.go('user-management', null, { reload: true });
+                    }, function() {
+                        $state.go('^');
+                    })
+                }]
+            })
+            .state('user-management.delete', {
+                parent: 'user-management',
+                url: '/{login}/delete',
+                data: {
+                    authorities: ['ROLE_ADMIN'],
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'scripts/app/admin/user-management/user-management-delete-dialog.html',
+                        controller: 'user-managementDeleteController',
+                        size: 'md',
                         resolve: {
                             entity: ['User', function(User) {
                                 return User.get({login : $stateParams.login});

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('cMPE295App')
+angular.module('cmpe295App')
     .service('ParseLinks', function () {
         this.parse = function (header) {
             if (header.length == 0) {

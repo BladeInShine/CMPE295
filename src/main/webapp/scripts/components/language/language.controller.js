@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('cMPE295App')
+angular.module('cmpe295App')
     .controller('LanguageController', function ($scope, $translate, Language, tmhDynamicLocale) {
         $scope.changeLanguage = function (languageKey) {
             $translate.use(languageKey);
@@ -32,6 +32,7 @@ angular.module('cMPE295App')
                 "ro": "Română",
                 "ru": "Русский",
                 "sv": "Svenska",
+                "ta": "தமிழ்",
                 "tr": "Türkçe",
                 "zh-cn": "中文（简体）",
                 "zh-tw": "繁體中文"

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('cMPE295App')
+angular.module('cmpe295App')
     .factory('MonitoringService', function ($rootScope, $http) {
         return {
             getMetrics: function () {

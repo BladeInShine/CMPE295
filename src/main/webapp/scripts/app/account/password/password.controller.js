@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('cMPE295App')
+angular.module('cmpe295App')
     .controller('PasswordController', function ($scope, Auth, Principal) {
         Principal.identity().then(function(account) {
             $scope.account = account;
@@ -11,6 +11,8 @@ angular.module('cMPE295App')
         $scope.doNotMatch = null;
         $scope.changePassword = function () {
             if ($scope.password !== $scope.confirmPassword) {
+                $scope.error = null;
+                $scope.success = null;
                 $scope.doNotMatch = 'ERROR';
             } else {
                 $scope.doNotMatch = null;

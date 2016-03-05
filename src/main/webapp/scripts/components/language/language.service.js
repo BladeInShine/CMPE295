@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('cMPE295App')
+angular.module('cmpe295App')
     .factory('Language', function ($q, $http, $translate, LANGUAGES) {
         return {
             getCurrent: function () {
@@ -28,10 +28,6 @@ angular.module('cMPE295App')
  */
     .constant('LANGUAGES', [
         'en', 'fr'
-        //JHipster will add new languages here
+        // jhipster-needle-006 - JHipster will add new languages here
     ]
 );
-
-
-
-

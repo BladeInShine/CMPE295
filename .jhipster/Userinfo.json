@@ -1,0 +1,31 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "one-to-one",
+            "ownerSide": false
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "bmi",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "gender",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "age",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20160304232542",
+    "dto": "no",
+    "pagination": "no"
+}

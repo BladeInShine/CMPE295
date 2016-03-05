@@ -1,8 +1,8 @@
 'use strict';
 
-describe('Controllers Tests ', function () {
+describe('Controller Tests', function () {
 
-    beforeEach(module('cMPE295App'));
+    beforeEach(module('cmpe295App'));
 
     describe('LoginController', function () {
         var $scope;

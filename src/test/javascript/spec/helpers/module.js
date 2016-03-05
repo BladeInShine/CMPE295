@@ -1,4 +1,4 @@
-beforeEach(module('cMPE295App'));
+beforeEach(module('cmpe295App'));
 /**
  * returns a function whose angular will be replaced
  * with whatever mock was supplied.

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('cMPE295App')
+angular.module('cmpe295App')
     .filter('capitalize', function () {
         return function (input, scope) {
             if (input != null)

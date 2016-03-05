@@ -9,6 +9,7 @@ import edu.sjsu.cmpe295.service.MailService;
 import edu.sjsu.cmpe295.service.UserService;
 import edu.sjsu.cmpe295.web.rest.dto.KeyAndPasswordDTO;
 import edu.sjsu.cmpe295.web.rest.dto.UserDTO;
+import edu.sjsu.cmpe295.web.rest.util.HeaderUtil;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -118,6 +119,10 @@ public class AccountResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<String> saveAccount(@RequestBody UserDTO userDTO) {
+        Optional<User> existingUser = userRepository.findOneByEmail(userDTO.getEmail());
+        if (existingUser.isPresent() && (!existingUser.get().getLogin().equalsIgnoreCase(userDTO.getLogin()))) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("user-management", "emailexists", "Email already in use")).body(null);
+        }
         return userRepository
             .findOneByLogin(SecurityUtils.getCurrentUser().getUsername())
             .map(u -> {

@@ -1,17 +1,21 @@
 'use strict';
 
-angular.module('cMPE295App')
-    .controller('UserManagementController', function ($scope, User, ParseLinks, Language) {
+angular.module('cmpe295App')
+    .controller('UserManagementController', function ($scope, Principal, User, ParseLinks, Language) {
         $scope.users = [];
         $scope.authorities = ["ROLE_USER", "ROLE_ADMIN"];
         Language.getAll().then(function (languages) {
             $scope.languages = languages;
         });
-
-        $scope.page = 0;
+		
+		Principal.identity().then(function(account) {
+            $scope.currentAccount = account;
+        });
+        $scope.page = 1;
         $scope.loadAll = function () {
-            User.query({page: $scope.page, per_page: 20}, function (result, headers) {
+            User.query({page: $scope.page - 1, size: 20}, function (result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
+                $scope.totalItems = headers('X-Total-Count');
                 $scope.users = result;
             });
         };

@@ -10,20 +10,27 @@ public class HeaderUtil {
 
     public static HttpHeaders createAlert(String message, String param) {
         HttpHeaders headers = new HttpHeaders();
-        headers.add("X-cMPE295App-alert", message);
-        headers.add("X-cMPE295App-params", param);
+        headers.add("X-cmpe295App-alert", message);
+        headers.add("X-cmpe295App-params", param);
         return headers;
     }
 
     public static HttpHeaders createEntityCreationAlert(String entityName, String param) {
-        return createAlert("cMPE295App." + entityName + ".created", param);
+        return createAlert("cmpe295App." + entityName + ".created", param);
     }
 
     public static HttpHeaders createEntityUpdateAlert(String entityName, String param) {
-        return createAlert("cMPE295App." + entityName + ".updated", param);
+        return createAlert("cmpe295App." + entityName + ".updated", param);
     }
 
     public static HttpHeaders createEntityDeletionAlert(String entityName, String param) {
-        return createAlert("cMPE295App." + entityName + ".deleted", param);
+        return createAlert("cmpe295App." + entityName + ".deleted", param);
+    }
+
+    public static HttpHeaders createFailureAlert(String entityName, String errorKey, String defaultMessage) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-cmpe295App-error", "error." + errorKey);
+        headers.add("X-cmpe295App-params", entityName);
+        return headers;
     }
 }

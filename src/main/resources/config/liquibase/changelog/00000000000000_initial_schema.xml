@@ -26,7 +26,7 @@
             <column name="login" type="varchar(50)">
                 <constraints unique="true" nullable="false"/>
             </column>
-            <column name="PASSWORD" type="varchar(60)"/>
+            <column name="password_hash" type="varchar(60)"/>
             <column name="first_name" type="varchar(50)"/>
             <column name="last_name" type="varchar(50)"/>
             <column name="email" type="varchar(100)">
@@ -49,8 +49,11 @@
             </column>
             <column name="last_modified_by" type="varchar(50)"/>
             <column name="last_modified_date" type="timestamp"/>
+            <column name="bmi" type="float"/>
+            <column name="age" type="int(3)"/>
+            <column name="gender" type="varchar(1)"/>
         </createTable>
-        
+
         <createIndex indexName="idx_user_login"
             tableName="jhi_user"
             unique="true">
@@ -62,7 +65,7 @@
             unique="true">
             <column name="email" type="varchar(100)"/>
         </createIndex>
-        
+
         <createTable tableName="jhi_authority">
             <column name="name" type="varchar(50)">
                 <constraints primaryKey="true" nullable="false"/>
@@ -151,7 +154,7 @@
                                  constraintName="fk_evt_pers_audit_evt_data"
                                  referencedColumnNames="event_id"
                                  referencedTableName="jhi_persistent_audit_event"/>
-    
+
     </changeSet>
-    
+
 </databaseChangeLog>

@@ -1,7 +1,7 @@
 /* globals $ */
 'use strict';
 
-angular.module('cMPE295App')
+angular.module('cmpe295App')
     .directive('showValidation', function() {
         return {
             restrict: 'A',

@@ -34,8 +34,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @JsonIgnore
     @NotNull
-    @Size(min = 60, max = 60) 
-    @Column(length = 60)
+    @Size(min = 60, max = 60)
+    @Column(name = "password_hash",length = 60)
     private String password;
 
     @Size(max = 50)
@@ -69,6 +69,16 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @Column(name = "reset_date", nullable = true)
     private ZonedDateTime resetDate = null;
+
+    @Column(name = "bmi")
+    private float bmi;
+
+    @Size(max = 1)
+    @Column(name = "gender")
+    private String gender;
+
+    @Column(name = "age")
+    private int age;
 
     @JsonIgnore
     @ManyToMany
@@ -175,6 +185,30 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.authorities = authorities;
     }
 
+    public float getBmi() {
+        return bmi;
+    }
+
+    public void setBmi(float bmi) {
+        this.bmi = bmi;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -201,13 +235,21 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Override
     public String toString() {
         return "User{" +
-            "login='" + login + '\'' +
+            "id=" + id +
+            ", login='" + login + '\'' +
+            ", password='" + password + '\'' +
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
-            ", activated='" + activated + '\'' +
+            ", activated=" + activated +
             ", langKey='" + langKey + '\'' +
             ", activationKey='" + activationKey + '\'' +
-            "}";
+            ", resetKey='" + resetKey + '\'' +
+            ", resetDate=" + resetDate +
+            ", bmi=" + bmi +
+            ", gender='" + gender + '\'' +
+            ", age=" + age +
+            ", authorities=" + authorities +
+            '}';
     }
 }
