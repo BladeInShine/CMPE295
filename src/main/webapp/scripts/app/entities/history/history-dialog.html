@@ -1,0 +1,56 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myHistoryLabel" translate="cmpe295App.history.home.createOrEditLabel">Create or edit a History</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="history.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="cmpe295App.history.image" for="field_image">Image</label>
+            <input type="text" class="form-control" name="image" id="field_image"
+                    ng-model="history.image"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="cmpe295App.history.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="history.description"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="cmpe295App.history.calorie" for="field_calorie">Calorie</label>
+            <input type="number" class="form-control" name="calorie" id="field_calorie"
+                    ng-model="history.calorie"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="cmpe295App.history.time" for="field_time">Time</label>
+            <input type="datetime-local" class="form-control" name="time" id="field_time"
+                    ng-model="history.time"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label translate="cmpe295App.history.user" for="field_user">user</label>
+            <select class="form-control" id="field_user" name="user" ng-model="history.user" ng-options="user as user.login for user in users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

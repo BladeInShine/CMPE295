@@ -71,14 +71,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private ZonedDateTime resetDate = null;
 
     @Column(name = "bmi")
-    private float bmi;
+    private Float bmi;
 
     @Size(max = 1)
     @Column(name = "gender")
     private String gender;
 
     @Column(name = "age")
-    private int age;
+    private Integer age;
 
     @JsonIgnore
     @ManyToMany
@@ -185,7 +185,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.authorities = authorities;
     }
 
-    public float getBmi() {
+    public Float getBmi() {
         return bmi;
     }
 
@@ -201,7 +201,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.gender = gender;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 

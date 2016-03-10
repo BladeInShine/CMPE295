@@ -1,0 +1,66 @@
+<div>
+    <h2 translate="cmpe295App.history.home.title">Historys</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="history.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                        translate="cmpe295App.history.home.createLabel">Create new History
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span translate="global.field.id">ID</span></th>
+                    <th><span translate="cmpe295App.history.image">Image</span></th>
+                    <th><span translate="cmpe295App.history.description">Description</span></th>
+                    <th><span translate="cmpe295App.history.calorie">Calorie</span></th>
+                    <th><span translate="cmpe295App.history.time">Time</span></th>
+                    <th><span translate="cmpe295App.history.user">user</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="history in historys track by history.id">
+                    <td><a ui-sref="history.detail({id:history.id})">{{history.id}}</a></td>
+                    <td>{{history.image}}</td>
+                    <td>{{history.description}}</td>
+                    <td>{{history.calorie}}</td>
+                    <td>{{history.time | date:'medium'}}</td>
+                    <td>
+                        {{history.user.login}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="history.detail({id:history.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="history.edit({id:history.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="history.delete({id:history.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
