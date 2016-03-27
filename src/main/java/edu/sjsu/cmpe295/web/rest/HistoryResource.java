@@ -1,18 +1,28 @@
 package edu.sjsu.cmpe295.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.ChannelSftp;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.Session;
 import edu.sjsu.cmpe295.domain.History;
 import edu.sjsu.cmpe295.repository.HistoryRepository;
 import edu.sjsu.cmpe295.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartResolver;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -26,10 +36,13 @@ import java.util.Optional;
 public class HistoryResource {
 
     private final Logger log = LoggerFactory.getLogger(HistoryResource.class);
-        
+
     @Inject
     private HistoryRepository historyRepository;
-    
+
+    @Inject
+    private MultipartResolver multipartResolver;
+
     /**
      * POST  /historys -> Create a new history.
      */
@@ -106,5 +119,46 @@ public class HistoryResource {
         log.debug("REST request to delete History : {}", id);
         historyRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("history", id.toString())).build();
+    }
+
+    @RequestMapping(value = "/historys/photo", method = RequestMethod.POST)
+    public ResponseEntity<String> uploadPhoto(HttpServletRequest request) throws IOException {
+        MultipartHttpServletRequest multipartHttpServletRequest = multipartResolver.resolveMultipart(request);
+
+        MultipartFile file = multipartHttpServletRequest.getFile("file");
+        File uploadFile = new File(file.getOriginalFilename());
+        file.transferTo(uploadFile);
+
+        String name = upload(uploadFile);
+
+        return new ResponseEntity<>(name, HttpStatus.OK);
+    }
+
+    private String upload(File file){
+        String SFTPHOST = "bladeinshine.com";
+        int    SFTPPORT = 22;
+        String SFTPUSER = "blad2833315478";
+        String SFTPPASS = "AF,I/o6lLeJfA";
+
+        Session session     = null;
+        Channel channel     = null;
+        ChannelSftp channelSftp = null;
+
+        try{
+            JSch jsch = new JSch();
+            session = jsch.getSession(SFTPUSER,SFTPHOST,SFTPPORT);
+            session.setPassword(SFTPPASS);
+            java.util.Properties config = new java.util.Properties();
+            config.put("StrictHostKeyChecking", "no");
+            session.setConfig(config);
+            session.connect();
+            channel = session.openChannel("sftp");
+            channel.connect();
+            channelSftp = (ChannelSftp)channel;
+            channelSftp.put(new FileInputStream(file), file.getName());
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return file.getName();
     }
 }

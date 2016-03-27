@@ -361,6 +361,13 @@
             <version>${metrics-spark-reporter.version}</version>
         </dependency>
         <!-- jhipster-needle-maven-add-dependency -->
+
+        <dependency>
+            <groupId>com.jcraft</groupId>
+            <artifactId>jsch</artifactId>
+            <version>0.1.53</version>
+        </dependency>
+
     </dependencies>
     <build>
         <defaultGoal>spring-boot:run</defaultGoal>
