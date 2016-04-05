@@ -1,3 +1,4 @@
+<script src="angular.min.js"></script>
 
 <form name="editForm" role="form" novalidate ng-submit="save()">
 
@@ -15,9 +16,14 @@
         </div>
         <div class="form-group">
             <label class="control-label" translate="cmpe295App.history.image" for="field_image">Image</label>
-            <input type="text" class="form-control" name="image" id="field_image"
+            <input type="file" class="form-control" name="imageFile" id="field_image"
                     ng-model="history.image"
-                     />
+                    accept="image/jpeg,image/png"
+                    onchange="angular.element(this).scope().uploadFile(this.files)"/>
+            <span class="error" ng-show="form-group.imageFile.$error.history.image">
+		            Not a JPEG or a PNG!
+	        </span>
+            <img ng-show="history.image.src" ng-src="{{history.image.src}}"/>
         </div>
         <div class="form-group">
             <label class="control-label" translate="cmpe295App.history.description" for="field_description">Description</label>
