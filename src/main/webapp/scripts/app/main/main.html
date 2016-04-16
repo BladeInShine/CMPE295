@@ -95,23 +95,40 @@ angular.element(document).ready(aaa);
 
 <h1 class="welcome">Welcome to Healthy Food Recommander</h1>
 
+
 <div ng-cloak>
     <div class="row main-panel">
         <div class="col-md-6" id="chartContainer" style="height: 300px;">
             <!--<span class="hipster img-responsive img-rounded"></span> -->
         </div>
+
+
+
+
         <div class="col-md-6">
             <!--<h1 translate="main.title">Welcome, Java Hipster!</h1> -->
             <!--<p class="lead" translate="main.subtitle">This is your homepage</p> -->
-            <p></p>
+            <form class="form" role="form" ng-submit="login($event)">
+                <div class="form-group">
+                    <label for="username" translate="global.form.username">Login</label>
+                    <input type="text" class="form-control" id="username" placeholder="{{'global.form.username.placeholder' | translate}}" ng-model="username">
+                </div>
+                <div class="form-group">
+                    <label for="password" translate="login.form.password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="{{'login.form.password.placeholder' | translate}}"
+                           ng-model="password">
+                </div>
+                <button type="submit" class="btn btn-primary" translate="login.form.button">Sign in</button>
+            </form>
+
             <div ng-switch="isAuthenticated()">
                 <div class="alert alert-success" ng-switch-when="true" translate="main.logged.message" translate-values="{username: '{{account.login}}'}">
                     You are logged in as user "{{account.login}}".
                 </div>
 
-                <div class="alert alert-warning" ng-switch-when="false" translate="global.messages.info.authenticated">
-                    If you want to <a class="alert-link" href="#/login">sign in</a>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").
-                </div>
+                <!--<div class="alert alert-warning" ng-switch-when="false" translate="global.messages.info.authenticated">-->
+                    <!--If you want to <a class="alert-link" href="#/login">sign in</a>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").-->
+                <!--</div>-->
 
                 <div class="alert alert-warning" ng-switch-when="false" translate="global.messages.info.register">
                     You don't have an account yet? <a class="alert-link" href="#/register">Register a new account</a>

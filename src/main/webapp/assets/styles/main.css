@@ -1,9 +1,9 @@
 body {
     margin: auto;
-    background: #92dce0;
+    background: #ffffdd;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
-    margin: 60px;
+    /*margin: 60px;*/
 
 }
 
@@ -184,9 +184,9 @@ ul#strengthBar {
     vertical-align:2px;
 }
 
-.point:last {
-    margin:0 !important;
-}
+/*.point:last {*/
+    /*margin:0 !important;*/
+/*}*/
 .point {
     background:#DDD;
     border-radius:2px;
@@ -237,7 +237,7 @@ ul#strengthBar {
 
 /* jhipster-needle-css-add-main JHipster will add new css style */
 .main-panel {
-  background:;
+    background: #ffffff;;
 }
 
 h1{
