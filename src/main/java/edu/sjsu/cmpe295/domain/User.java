@@ -70,8 +70,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "reset_date", nullable = true)
     private ZonedDateTime resetDate = null;
 
-    @Column(name = "bmi")
-    private Float bmi;
+    @Column(name = "weight")
+    private Integer weight;
+
+    @Column(name = "height")
+    private Integer height;
 
     @Size(max = 1)
     @Column(name = "gender")
@@ -185,12 +188,20 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.authorities = authorities;
     }
 
-    public Float getBmi() {
-        return bmi;
+    public Integer getWeight() {
+        return weight;
     }
 
-    public void setBmi(float bmi) {
-        this.bmi = bmi;
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
     }
 
     public String getGender() {
@@ -246,10 +257,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", activationKey='" + activationKey + '\'' +
             ", resetKey='" + resetKey + '\'' +
             ", resetDate=" + resetDate +
-            ", bmi=" + bmi +
+            ", weight=" + weight +
+            ", height=" + height +
             ", gender='" + gender + '\'' +
             ", age=" + age +
-            ", authorities=" + authorities +
             '}';
     }
 }

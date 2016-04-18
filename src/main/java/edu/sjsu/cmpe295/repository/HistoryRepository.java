@@ -14,4 +14,6 @@ public interface HistoryRepository extends JpaRepository<History,Long> {
     @Query("select history from History history where history.user.login = ?#{principal.username}")
     List<History> findByUserIsCurrentUser();
 
+    List<History> findByUserId(long userid);
+
 }
