@@ -1588,38 +1588,27 @@ pre code {
   margin-right: auto;
   margin-left: auto;
 }
+@media (min-width: 500px) {
+    #loginAtMain {
+        width : 500px;
+    }
+}
+
 @media (min-width: 768px) {
   .container {
-    /*width: 750px;*/
   }
     #loginAtMain {
-        width : 70%;
-        align-content: inherit;
-        margin-top: 0px;
+        width : 500px;
     }
 }
 @media (min-width: 992px) {
   .container {
-    /*width: 970px;*/
   }
-    /*#chartContainer {*/
-        /*!*width: 450px;*!*/
-        /*!*height: 500px;*!*/
-    /*}*/
-    #loginAtMain {
-        width : 70%;
-        align-content: center;
-        margin-top: 50px;
-    }
 }
 @media (min-width: 1200px) {
   .container {
-    /*width: 1170px;*/
+
   }
-    /*#chartContainer {*/
-        /*!*width: 600px;*!*/
-        /*!*height: 500px;*!*/
-    /*}*/
 }
 .container-fluid {
   padding-right: 15px;

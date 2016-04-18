@@ -4,27 +4,27 @@
             {
                 height: 300,
                 width: 500,
-                title:{
+                title: {
                     text: "Your Cal History",
                     fontSize: 30
                 },
                 animationEnabled: true,
-                axisX:{
+                axisX: {
 
                     gridColor: "Silver",
                     tickColor: "silver",
                     valueFormatString: "DD/MMM"
 
                 },
-                toolTip:{
-                    shared:true
+                toolTip: {
+                    shared: true
                 },
                 theme: "theme2",
                 axisY: {
                     gridColor: "Silver",
                     tickColor: "silver"
                 },
-                legend:{
+                legend: {
                     verticalAlign: "center",
                     horizontalAlign: "right"
                 },
@@ -37,17 +37,17 @@
                         markerType: "square",
                         color: "#F08080",
                         dataPoints: [
-                            { x: new Date(2010,0,3), y: 650 },
-                            { x: new Date(2010,0,5), y: 700 },
-                            { x: new Date(2010,0,7), y: 710 },
-                            { x: new Date(2010,0,9), y: 658 },
-                            { x: new Date(2010,0,11), y: 734 },
-                            { x: new Date(2010,0,13), y: 963 },
-                            { x: new Date(2010,0,15), y: 847 },
-                            { x: new Date(2010,0,17), y: 853 },
-                            { x: new Date(2010,0,19), y: 869 },
-                            { x: new Date(2010,0,21), y: 943 },
-                            { x: new Date(2010,0,23), y: 970 }
+                            {x: new Date(2010, 0, 3), y: 650},
+                            {x: new Date(2010, 0, 5), y: 700},
+                            {x: new Date(2010, 0, 7), y: 710},
+                            {x: new Date(2010, 0, 9), y: 658},
+                            {x: new Date(2010, 0, 11), y: 734},
+                            {x: new Date(2010, 0, 13), y: 963},
+                            {x: new Date(2010, 0, 15), y: 847},
+                            {x: new Date(2010, 0, 17), y: 853},
+                            {x: new Date(2010, 0, 19), y: 869},
+                            {x: new Date(2010, 0, 21), y: 943},
+                            {x: new Date(2010, 0, 23), y: 970}
                         ]
                     },
                     {
@@ -58,29 +58,29 @@
                         lineThickness: 2,
 
                         dataPoints: [
-                            { x: new Date(2010,0,3), y: 510 },
-                            { x: new Date(2010,0,5), y: 560 },
-                            { x: new Date(2010,0,7), y: 540 },
-                            { x: new Date(2010,0,9), y: 558 },
-                            { x: new Date(2010,0,11), y: 544 },
-                            { x: new Date(2010,0,13), y: 693 },
-                            { x: new Date(2010,0,15), y: 657 },
-                            { x: new Date(2010,0,17), y: 663 },
-                            { x: new Date(2010,0,19), y: 639 },
-                            { x: new Date(2010,0,21), y: 673 },
-                            { x: new Date(2010,0,23), y: 660 }
+                            {x: new Date(2010, 0, 3), y: 510},
+                            {x: new Date(2010, 0, 5), y: 560},
+                            {x: new Date(2010, 0, 7), y: 540},
+                            {x: new Date(2010, 0, 9), y: 558},
+                            {x: new Date(2010, 0, 11), y: 544},
+                            {x: new Date(2010, 0, 13), y: 693},
+                            {x: new Date(2010, 0, 15), y: 657},
+                            {x: new Date(2010, 0, 17), y: 663},
+                            {x: new Date(2010, 0, 19), y: 639},
+                            {x: new Date(2010, 0, 21), y: 673},
+                            {x: new Date(2010, 0, 23), y: 660}
                         ]
                     }
 
 
                 ],
-                legend:{
-                    cursor:"pointer",
-                    itemclick:function(e){
+                legend: {
+                    cursor: "pointer",
+                    itemclick: function (e) {
                         if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
                             e.dataSeries.visible = false;
                         }
-                        else{
+                        else {
                             e.dataSeries.visible = true;
                         }
                         chart.render();
@@ -89,7 +89,8 @@
             });
 
         chart.render();
-    };
+    }
+    ;
     angular.element(document).ready(aaa);
 </script>
 
@@ -97,29 +98,31 @@
 
 
 <!--<div ng-cloak>-->
-    <div class="row main-panel">
-        <div class="col-md-6" id="chartContainer" style="height: 300px;">
-            <!--<span class="hipster img-responsive img-rounded"></span> -->
-        </div>
+<div class="row main-panel">
+    <div class="col-md-6" id="chartContainer" style="height: 300px;">
+        <!--<span class="hipster img-responsive img-rounded"></span> -->
+    </div>
 
 
-
-
-        <div class="col-md-6" uiview = "loginTP">
+    <div class="col-md-6">
+        <div id="loginAtMain" width="500px">
             <h1 translate="login.title">Sign in</h1>
 
-            <div class="alert alert-danger" ng-show="authenticationError" translate="login.messages.error.authentication">
+            <div class="alert alert-danger" ng-show="authenticationError"
+                 translate="login.messages.error.authentication">
                 <strong>Failed to sign in!</strong> Please check your credentials and try again.
             </div>
 
             <form class="form" role="form" ng-submit="login($event)">
                 <div class="form-group">
                     <label for="username" translate="global.form.username">Login</label>
-                    <input type="text" class="form-control" id="username" placeholder="{{'global.form.username.placeholder' | translate}}" ng-model="username">
+                    <input type="text" class="form-control" id="username"
+                           placeholder="{{'global.form.username.placeholder' | translate}}" ng-model="username">
                 </div>
                 <div class="form-group">
                     <label for="password" translate="login.form.password">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="{{'login.form.password.placeholder' | translate}}"
+                    <input type="password" class="form-control" id="password"
+                           placeholder="{{'login.form.password.placeholder' | translate}}"
                            ng-model="password">
                 </div>
                 <button type="submit" class="btn btn-primary" translate="login.form.button">Sign in</button>
@@ -152,4 +155,5 @@
               -->
         </div>
     </div>
+</div>
 <!--</div>-->
