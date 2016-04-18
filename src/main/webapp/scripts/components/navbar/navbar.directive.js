@@ -2,6 +2,7 @@
 
 angular.module('cmpe295App')
     .directive('activeMenu', function($translate, $locale, tmhDynamicLocale) {
+        console.log("======navbar.directive.js 1");
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
@@ -21,6 +22,7 @@ angular.module('cmpe295App')
         };
     })
     .directive('activeLink', function(location) {
+        console.log("======navbar.directive.js 2");
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {

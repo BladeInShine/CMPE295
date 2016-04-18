@@ -1,102 +1,102 @@
 <script>
     function aaa() {
-    var chart = new CanvasJS.Chart("chartContainer",
-    {
-        height: 300,
-        width: 500,
-        title:{
-            text: "Your Cal History",
-            fontSize: 30
-        },
-                    animationEnabled: true,
-        axisX:{
+        var chart = new CanvasJS.Chart("chartContainer",
+            {
+                height: 300,
+                width: 500,
+                title:{
+                    text: "Your Cal History",
+                    fontSize: 30
+                },
+                animationEnabled: true,
+                axisX:{
 
-            gridColor: "Silver",
-            tickColor: "silver",
-            valueFormatString: "DD/MMM"
+                    gridColor: "Silver",
+                    tickColor: "silver",
+                    valueFormatString: "DD/MMM"
 
-        },
-                    toolTip:{
-                      shared:true
+                },
+                toolTip:{
+                    shared:true
+                },
+                theme: "theme2",
+                axisY: {
+                    gridColor: "Silver",
+                    tickColor: "silver"
+                },
+                legend:{
+                    verticalAlign: "center",
+                    horizontalAlign: "right"
+                },
+                data: [
+                    {
+                        type: "line",
+                        showInLegend: true,
+                        lineThickness: 2,
+                        name: "Intake Cal",
+                        markerType: "square",
+                        color: "#F08080",
+                        dataPoints: [
+                            { x: new Date(2010,0,3), y: 650 },
+                            { x: new Date(2010,0,5), y: 700 },
+                            { x: new Date(2010,0,7), y: 710 },
+                            { x: new Date(2010,0,9), y: 658 },
+                            { x: new Date(2010,0,11), y: 734 },
+                            { x: new Date(2010,0,13), y: 963 },
+                            { x: new Date(2010,0,15), y: 847 },
+                            { x: new Date(2010,0,17), y: 853 },
+                            { x: new Date(2010,0,19), y: 869 },
+                            { x: new Date(2010,0,21), y: 943 },
+                            { x: new Date(2010,0,23), y: 970 }
+                        ]
                     },
-        theme: "theme2",
-        axisY: {
-            gridColor: "Silver",
-            tickColor: "silver"
-        },
-        legend:{
-            verticalAlign: "center",
-            horizontalAlign: "right"
-        },
-        data: [
-        {
-            type: "line",
-            showInLegend: true,
-            lineThickness: 2,
-            name: "Intake Cal",
-            markerType: "square",
-            color: "#F08080",
-            dataPoints: [
-            { x: new Date(2010,0,3), y: 650 },
-            { x: new Date(2010,0,5), y: 700 },
-            { x: new Date(2010,0,7), y: 710 },
-            { x: new Date(2010,0,9), y: 658 },
-            { x: new Date(2010,0,11), y: 734 },
-            { x: new Date(2010,0,13), y: 963 },
-            { x: new Date(2010,0,15), y: 847 },
-            { x: new Date(2010,0,17), y: 853 },
-            { x: new Date(2010,0,19), y: 869 },
-            { x: new Date(2010,0,21), y: 943 },
-            { x: new Date(2010,0,23), y: 970 }
-            ]
-        },
-        {
-            type: "line",
-            showInLegend: true,
-            name: "Consumed Cal",
-            color: "#20B2AA",
-            lineThickness: 2,
+                    {
+                        type: "line",
+                        showInLegend: true,
+                        name: "Consumed Cal",
+                        color: "#20B2AA",
+                        lineThickness: 2,
 
-            dataPoints: [
-            { x: new Date(2010,0,3), y: 510 },
-            { x: new Date(2010,0,5), y: 560 },
-            { x: new Date(2010,0,7), y: 540 },
-            { x: new Date(2010,0,9), y: 558 },
-            { x: new Date(2010,0,11), y: 544 },
-            { x: new Date(2010,0,13), y: 693 },
-            { x: new Date(2010,0,15), y: 657 },
-            { x: new Date(2010,0,17), y: 663 },
-            { x: new Date(2010,0,19), y: 639 },
-            { x: new Date(2010,0,21), y: 673 },
-            { x: new Date(2010,0,23), y: 660 }
-            ]
-        }
+                        dataPoints: [
+                            { x: new Date(2010,0,3), y: 510 },
+                            { x: new Date(2010,0,5), y: 560 },
+                            { x: new Date(2010,0,7), y: 540 },
+                            { x: new Date(2010,0,9), y: 558 },
+                            { x: new Date(2010,0,11), y: 544 },
+                            { x: new Date(2010,0,13), y: 693 },
+                            { x: new Date(2010,0,15), y: 657 },
+                            { x: new Date(2010,0,17), y: 663 },
+                            { x: new Date(2010,0,19), y: 639 },
+                            { x: new Date(2010,0,21), y: 673 },
+                            { x: new Date(2010,0,23), y: 660 }
+                        ]
+                    }
 
 
-        ],
-      legend:{
-        cursor:"pointer",
-        itemclick:function(e){
-          if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-            e.dataSeries.visible = false;
-          }
-          else{
-            e.dataSeries.visible = true;
-          }
-          chart.render();
-        }
-      }
-    });
+                ],
+                legend:{
+                    cursor:"pointer",
+                    itemclick:function(e){
+                        if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                            e.dataSeries.visible = false;
+                        }
+                        else{
+                            e.dataSeries.visible = true;
+                        }
+                        chart.render();
+                    }
+                }
+            });
 
-    chart.render();
-};
-angular.element(document).ready(aaa);
+        chart.render();
+    };
+    angular.element(document).ready(aaa);
 </script>
 
 <h1 class="welcome">Welcome to Healthy Food Recommander</h1>
 
 
-<div ng-cloak>
+<!--<div ng-cloak>-->
     <div class="row main-panel">
         <div class="col-md-6" id="chartContainer" style="height: 300px;">
             <!--<span class="hipster img-responsive img-rounded"></span> -->
@@ -105,9 +105,13 @@ angular.element(document).ready(aaa);
 
 
 
-        <div class="col-md-6">
-            <!--<h1 translate="main.title">Welcome, Java Hipster!</h1> -->
-            <!--<p class="lead" translate="main.subtitle">This is your homepage</p> -->
+        <div class="col-md-6" uiview = "loginTP">
+            <h1 translate="login.title">Sign in</h1>
+
+            <div class="alert alert-danger" ng-show="authenticationError" translate="login.messages.error.authentication">
+                <strong>Failed to sign in!</strong> Please check your credentials and try again.
+            </div>
+
             <form class="form" role="form" ng-submit="login($event)">
                 <div class="form-group">
                     <label for="username" translate="global.form.username">Login</label>
@@ -120,37 +124,32 @@ angular.element(document).ready(aaa);
                 </div>
                 <button type="submit" class="btn btn-primary" translate="login.form.button">Sign in</button>
             </form>
+            <p></p>
 
-            <div ng-switch="isAuthenticated()">
-                <div class="alert alert-success" ng-switch-when="true" translate="main.logged.message" translate-values="{username: '{{account.login}}'}">
-                    You are logged in as user "{{account.login}}".
-                </div>
-
-                <!--<div class="alert alert-warning" ng-switch-when="false" translate="global.messages.info.authenticated">-->
-                    <!--If you want to <a class="alert-link" href="#/login">sign in</a>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").-->
-                <!--</div>-->
-
-                <div class="alert alert-warning" ng-switch-when="false" translate="global.messages.info.register">
-                    You don't have an account yet? <a class="alert-link" href="#/register">Register a new account</a>
-                </div>
+            <div class="alert alert-warning" translate="global.messages.info.register">
+                You don't have an account yet? <a class="alert-link" href="#/register">Register a new account</a>
             </div>
 
-         <!--   <p translate="main.question">
-                If you have any question on JHipster:
-            </p>
+            <!--<h1 translate="main.title">Welcome, Java Hipster!</h1> -->
+            <!--<p class="lead" translate="main.subtitle">This is your homepage</p> -->
 
-            <ul>
-                <li><a href="http://jhipster.github.io/" target="_blank" translate="main.link.homepage">JHipster homepage</a></li>
-                <li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" translate="main.link.stackoverflow">JHipster on Stack Overflow</a></li>
-                <li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" translate="main.link.bugtracker">JHipster bug tracker</a></li>
-                <li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" translate="main.link.chat">JHipster public chat room</a></li>
-                <li><a href="https://twitter.com/java_hipster" target="_blank"  translate="main.link.contact">contact @java_hipster on Twitter</a></li>
-            </ul>
 
-            <p>
-             <span translate="main.like">If you like JHipster, don't forget to give us a star on </span>&nbsp;<a href="https://github.com/jhipster/generator-jhipster" target="_blank" translate="main.github">Github</a>!
-            </p>
-           -->
+            <!--   <p translate="main.question">
+                   If you have any question on JHipster:
+               </p>
+
+               <ul>
+                   <li><a href="http://jhipster.github.io/" target="_blank" translate="main.link.homepage">JHipster homepage</a></li>
+                   <li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" translate="main.link.stackoverflow">JHipster on Stack Overflow</a></li>
+                   <li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" translate="main.link.bugtracker">JHipster bug tracker</a></li>
+                   <li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" translate="main.link.chat">JHipster public chat room</a></li>
+                   <li><a href="https://twitter.com/java_hipster" target="_blank"  translate="main.link.contact">contact @java_hipster on Twitter</a></li>
+               </ul>
+
+               <p>
+                <span translate="main.like">If you like JHipster, don't forget to give us a star on </span>&nbsp;<a href="https://github.com/jhipster/generator-jhipster" target="_blank" translate="main.github">Github</a>!
+               </p>
+              -->
         </div>
     </div>
-</div>
+<!--</div>-->

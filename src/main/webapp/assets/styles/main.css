@@ -237,10 +237,15 @@ ul#strengthBar {
 
 /* jhipster-needle-css-add-main JHipster will add new css style */
 .main-panel {
-    background: #ffffff;;
+    background: #ffffff;
+    padding-top: 15px;;
 }
 
 h1{
     text-align: center;
     color: #3ec303;
 }
+#chartContainer {
+    /*alignment: center;*/
+}
+
