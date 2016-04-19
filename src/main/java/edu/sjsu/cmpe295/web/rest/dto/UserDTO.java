@@ -40,6 +40,14 @@ public class UserDTO {
     @Size(min = 2, max = 5)
     private String langKey;
 
+    private Integer weight;
+
+    private Integer height;
+
+    private String gender;
+
+    private Integer age;
+
     private Set<String> authorities;
 
     public UserDTO() {
@@ -48,12 +56,14 @@ public class UserDTO {
     public UserDTO(User user) {
         this(user.getLogin(), null, user.getFirstName(), user.getLastName(),
             user.getEmail(), user.getActivated(), user.getLangKey(),
+            user.getWeight(), user.getHeight(), user.getGender(), user.getAge(),
             user.getAuthorities().stream().map(Authority::getName)
                 .collect(Collectors.toSet()));
     }
 
     public UserDTO(String login, String password, String firstName, String lastName,
-        String email, boolean activated, String langKey, Set<String> authorities) {
+        String email, boolean activated, String langKey,
+                   int weight, int height, String gender, int age, Set<String> authorities) {
 
         this.login = login;
         this.password = password;
@@ -62,6 +72,10 @@ public class UserDTO {
         this.email = email;
         this.activated = activated;
         this.langKey = langKey;
+        this.weight = weight;
+        this.height = height;
+        this.gender = gender;
+        this.age = age;
         this.authorities = authorities;
     }
 
@@ -91,6 +105,22 @@ public class UserDTO {
 
     public String getLangKey() {
         return langKey;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public Integer getAge() {
+        return age;
     }
 
     public Set<String> getAuthorities() {
