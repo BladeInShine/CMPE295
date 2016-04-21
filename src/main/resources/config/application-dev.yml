@@ -60,8 +60,18 @@ jhipster:
         timeToLiveSeconds: 3600
         ehcache:
             maxBytesLocalHeap: 16M
-    mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: CMPE295@localhost
+    mail:
+            host: smtp.mail.yahoo.com
+            port: 587
+            username: ddc524524@yahoo.com
+            password: Ddc19920524
+            protocol: smtp
+            tls: true
+            properties:
+                mail.smtp:
+                    auth: true
+                    starttls.enable: true
+                    ssl.trust: smtp.mail.yahoo.com
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
         spark:
