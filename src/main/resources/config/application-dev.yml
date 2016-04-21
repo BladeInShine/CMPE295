@@ -34,7 +34,17 @@ spring:
             hibernate.generate_statistics: true
             hibernate.cache.region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
     mail:
-        host: localhost
+            host: smtp.mail.yahoo.com
+            port: 587
+            username: ddc524524@yahoo.com
+            password: Ddc19920524
+            protocol: smtp
+            tls: true
+            properties:
+                mail.smtp:
+                    auth: true
+                    starttls.enable: true
+                    ssl.trust: smtp.mail.yahoo.com
     messages:
         cache-seconds: 1
     thymeleaf:
@@ -60,18 +70,8 @@ jhipster:
         timeToLiveSeconds: 3600
         ehcache:
             maxBytesLocalHeap: 16M
-    mail:
-            host: smtp.mail.yahoo.com
-            port: 587
-            username: ddc524524@yahoo.com
-            password: Ddc19920524
-            protocol: smtp
-            tls: true
-            properties:
-                mail.smtp:
-                    auth: true
-                    starttls.enable: true
-                    ssl.trust: smtp.mail.yahoo.com
+    mail: # specific JHipster mail property, for standard properties see MailProperties
+        from: ddc524524@yahoo.com
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
         spark:
