@@ -12,12 +12,17 @@ angular.module('cmpe295App')
                 views: {
                     'content@': {
                         templateUrl: 'scripts/app/main/main.html',
-                        controller: ['MainController','LoginController']
+                        controller: 'MainController'
+                    },
+                    'loginPanel@':{
+                        templateUrl: 'scripts/app/account/login/login.html',
+                        controller: 'LoginController'
                     }
                 },
                 resolve: {
                     mainTranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {
                         $translatePartialLoader.addPart('main');
+                        $translatePartialLoader.addPart('login');
                         return $translate.refresh();
                     }]
                 }

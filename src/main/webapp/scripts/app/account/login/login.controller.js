@@ -4,7 +4,8 @@ angular.module('cmpe295App')
     .controller('LoginController', function ($rootScope, $scope, $state, $timeout, Auth) {
         $scope.user = {};
         $scope.errors = {};
-
+        $scope.tryLogin=false;
+        
         $scope.rememberMe = true;
         $timeout(function (){angular.element('[ng-model="username"]').focus();});
         $scope.login = function (event) {
