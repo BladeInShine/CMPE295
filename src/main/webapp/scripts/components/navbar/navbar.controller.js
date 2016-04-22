@@ -8,6 +8,7 @@ angular.module('cmpe295App')
 
         $scope.logout = function () {
             Auth.logout();
+            $scope.usingRecommender = false;
             $state.go('home');
         };
     });

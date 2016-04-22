@@ -4,7 +4,6 @@ angular.module('cmpe295App')
     .controller('LoginController', function ($rootScope, $scope, $state, $timeout, Auth) {
         $scope.user = {};
         $scope.errors = {};
-        $scope.tryLogin=false;
         
         $scope.rememberMe = true;
         $timeout(function (){angular.element('[ng-model="username"]').focus();});
@@ -15,6 +14,7 @@ angular.module('cmpe295App')
                 password: $scope.password,
                 rememberMe: $scope.rememberMe
             }).then(function () {
+                $scope.usingRecommender = true;
                 $scope.authenticationError = false;
                 if ($rootScope.previousStateName === 'register') {
                     $state.go('home');
@@ -22,6 +22,7 @@ angular.module('cmpe295App')
                     $rootScope.back();
                 }
             }).catch(function () {
+                $scope.usingRecommender = false;
                 $scope.authenticationError = true;
             });
         };
