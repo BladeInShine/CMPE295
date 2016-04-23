@@ -14,7 +14,7 @@ angular.module('cmpe295App')
                 password: $scope.password,
                 rememberMe: $scope.rememberMe
             }).then(function () {
-                $scope.usingRecommender = true;
+                $scope.$parent.usingRecommender = true;
                 $scope.authenticationError = false;
                 if ($rootScope.previousStateName === 'register') {
                     $state.go('home');
@@ -22,7 +22,7 @@ angular.module('cmpe295App')
                     $rootScope.back();
                 }
             }).catch(function () {
-                $scope.usingRecommender = false;
+                $scope.$parent.usingRecommender = false;
                 $scope.authenticationError = true;
             });
         };
