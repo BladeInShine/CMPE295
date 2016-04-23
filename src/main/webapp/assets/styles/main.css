@@ -251,3 +251,10 @@ h1{
     margin: -70px 10px auto 700px;
 }
 
+.description {
+    height: 300px;
+    width: 600px;
+    margin: 0px 10px auto 700px;
+    background-color: #b2dba1;
+}
+
