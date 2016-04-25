@@ -1,0 +1,49 @@
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css">
+
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.js"></script>
+
+<script>
+    console.log("table description's id is "+$scope.id);
+    console.log("parent's id is "+$scope.$parent.id);
+    // ignore this first line (its fidle mock) and it will return what ever you pass as json:... parameter... consider to change it to your ajax call
+
+
+function drawRow(rowData) {
+    var row = $("<tr />")
+    $("#histDataTable").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
+    row.append($("<td>" + rowData.id + "</td>"));
+    row.append($("<td>" + rowData.firstName + "</td>"));
+    row.append($("<td>" + rowData.lastName + "</td>"));
+};
+
+function drawTable() {
+    var mydata =  [{
+            id: 1,
+            firstName: "Peter",
+            lastName: "Jhons"},
+        {
+            id: 2,
+            firstName: "David",
+            lastName: "Bowie"}];
+    for (var i = 0; i < mydata.length; i++) {
+        drawRow(mydata[i]);
+    }
+};
+
+</script>
+
+<div class="descrip" >
+        <h1>User's Recent Calories Data</h1>
+        <table id="histDataTable" >
+            <tr>
+                <th>Date</th>
+                <th>Intake Calories</th>
+                <th>Consumed Calories</th>
+                <th>Description</th>
+                <th>Foods</th>
+            </tr>
+
+        </table>
+</div>
+
+

@@ -19,13 +19,15 @@ angular.module('cmpe295App')
                         controller: 'LoginController'
                     },
                     'descripPanel@':{
-                        templateUrl: 'scripts/app/decription/descrip.html'
+                        templateUrl: 'scripts/app/account/descrip/descrip.html',
+                        controller: 'DescripController'
                     }
                 },
                 resolve: {
                     mainTranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {
                         $translatePartialLoader.addPart('main');
                         $translatePartialLoader.addPart('login');
+                        $translatePartialLoader.addPart('descrip');
                         return $translate.refresh();
                     }]
                 }
