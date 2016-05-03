@@ -28,6 +28,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -131,8 +132,14 @@ public class HistoryResource {
         JsonArray ret = new JsonArray();
         for(History history : userHistory){
             JsonObject jsonObject = new JsonObject();
-            String date = ""+history.getTime().getDayOfMonth()+history.getTime().getDayOfMonth()+history.getTime().getYear();
-            jsonObject.addProperty("date", date);
+            ZonedDateTime date = history.getTime();
+            String datestr = "";
+            if(date.getDayOfMonth() < 10) datestr += "0";
+            datestr += date.getDayOfMonth();
+            if(date.getMonthValue() < 10) datestr += "0";
+            datestr += date.getMonthValue();
+            datestr += date.getYear();
+            jsonObject.addProperty("date", datestr);
             if(history.getCalorie() >= 0){
                 jsonObject.addProperty("intake", history.getCalorie());
                 jsonObject.addProperty("consumed", 0);
@@ -142,6 +149,43 @@ public class HistoryResource {
                 jsonObject.addProperty("consumed", history.getCalorie()*-1);
             }
             jsonObject.addProperty("descrip", history.getDescription());
+            ret.add(jsonObject);
+        }
+        Gson gson = new Gson();
+        return new ResponseEntity<String>(gson.toJson(ret), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/historys/graph", method = RequestMethod.GET)
+    public ResponseEntity<String> fetchUserDataByDate(){
+        List<History> userHistory = historyRepository.findByUserIsCurrentUser();
+
+        int[] intake = new int[7];
+        int[] consume = new int[7];
+
+        for(History history : userHistory){
+            if(ZonedDateTime.now().getDayOfYear() - history.getTime().getDayOfYear() < 7){
+                if(history.getCalorie() >= 0){
+                    intake[ZonedDateTime.now().getDayOfYear() - history.getTime().getDayOfYear()] += history.getCalorie();
+                }
+                else{
+                    consume[ZonedDateTime.now().getDayOfYear() - history.getTime().getDayOfYear()] += history.getCalorie()*-1;
+                }
+            }
+        }
+
+        JsonArray ret = new JsonArray();
+        for(int i=6;i>=0;i--){
+            JsonObject jsonObject = new JsonObject();
+            ZonedDateTime date = ZonedDateTime.now().minusDays((long)i);
+            String datestr = "";
+            if(date.getDayOfMonth() < 10) datestr += "0";
+            datestr += date.getDayOfMonth();
+            if(date.getMonthValue() < 10) datestr += "0";
+            datestr += date.getMonthValue();
+            datestr += date.getYear();
+            jsonObject.addProperty("date", datestr);
+            jsonObject.addProperty("intake", intake[i]);
+            jsonObject.addProperty("consumed", consume[i]);
             ret.add(jsonObject);
         }
         Gson gson = new Gson();
