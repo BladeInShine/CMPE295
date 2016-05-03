@@ -33,8 +33,8 @@ public class RecommendResource {
         return userRepository.findOneByLogin(username)
             .map(u -> {
                 double calory = recommendService.calorieCalculator(u);
-                int min = (int) (calory*1.1/2.5);
-                int max = (int) (calory*1.2/2.5);
+                int min = (int) (calory*1.2/2.5);
+                int max = (int) (calory*1.375/2.5);
                 String recommend = null;
                 try {
                     recommend = recommendService.fetchNutritionixByCalory(min, max);
