@@ -238,18 +238,18 @@ ul#strengthBar {
 /* jhipster-needle-css-add-main JHipster will add new css style */
 .main-panel {
     background: #ffffff;
-    padding-top: 15px;;
+    padding-bottom: 55px;;
 }
 
 h1{
     text-align: center;
     color: #3ec303;
 }
-#loginPanel {
+/*#loginPanel {*/
     /*width: 600px;*/
-    /*height: 300px;*/
-    margin: -70px 10px auto 700px;
-}
+    /*!*height: 300px;*!*/
+    /*margin: -70px auto;*/
+/*}*/
 
 .description {
     height: 300px;

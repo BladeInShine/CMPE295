@@ -1605,10 +1605,20 @@ pre code {
   .container {
   }
 }
+/*@media (min-width: 1200px) {*/
+    /*.container {*/
+
+    /*}*/
+/*}*/
 @media (min-width: 1200px) {
   .container {
 
   }
+    #loginPanel {
+        width: 600px;
+        /*height: 300px;*/
+        margin: -70px auto;
+    }
 }
 .container-fluid {
   padding-right: 15px;

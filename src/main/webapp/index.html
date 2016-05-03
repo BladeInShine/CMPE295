@@ -25,9 +25,10 @@
         <!--<div ng-show="{{ENV === 'dev'}}" class="development" ng-cloak=""></div>-->
         <div ui-view="navbar" ng-cloak=""></div>
 
-        <div class="container">
+        <!--<div class="container">-->
+        <div class="row main-panel">
             <div class="well" ui-view="content"></div>
-            <div id="loginPanel" class="well" ui-view="loginPanel" ng-hide="usingRecommender==true" ng-show="usingRecommender==false"></div>
+            <div id="loginPanel" class="col-md-6" ui-view="loginPanel1" ng-hide="usingRecommender==true" ng-show="usingRecommender==false"></div>
         </div>
 
 
