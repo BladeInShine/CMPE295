@@ -1,6 +1,9 @@
 package edu.sjsu.cmpe295.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
@@ -119,6 +122,30 @@ public class HistoryResource {
         log.debug("REST request to delete History : {}", id);
         historyRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("history", id.toString())).build();
+    }
+
+
+    @RequestMapping(value = "/historys/table", method = RequestMethod.GET)
+    public ResponseEntity<String> fetchUserData(){
+        List<History> userHistory = historyRepository.findByUserIsCurrentUser();
+        JsonArray ret = new JsonArray();
+        for(History history : userHistory){
+            JsonObject jsonObject = new JsonObject();
+            String date = ""+history.getTime().getDayOfMonth()+history.getTime().getDayOfMonth()+history.getTime().getYear();
+            jsonObject.addProperty("date", date);
+            if(history.getCalorie() >= 0){
+                jsonObject.addProperty("intake", history.getCalorie());
+                jsonObject.addProperty("consumed", 0);
+            }
+            else{
+                jsonObject.addProperty("intake", 0);
+                jsonObject.addProperty("consumed", history.getCalorie()*-1);
+            }
+            jsonObject.addProperty("descrip", history.getDescription());
+            ret.add(jsonObject);
+        }
+        Gson gson = new Gson();
+        return new ResponseEntity<String>(gson.toJson(ret), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/historys/photo", method = RequestMethod.POST)

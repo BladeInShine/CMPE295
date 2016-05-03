@@ -15,5 +15,4 @@ public interface HistoryRepository extends JpaRepository<History,Long> {
     List<History> findByUserIsCurrentUser();
 
     List<History> findByUserId(long userid);
-
 }
