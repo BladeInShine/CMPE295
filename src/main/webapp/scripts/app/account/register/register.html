@@ -51,6 +51,20 @@
                         </p>
                     </div>
                 </div>
+
+                <div class="form-group col-md-6">
+                    <label class="control-label" for="first_name" translate="">First Name(optional)</label>
+                    <input type="text" class="form-control" id="first_name" name="first_name"
+                           placeholder="{{'Your First Name' | translate}}"
+                           ng-model="registerAccount.first_name" ng-minlength=1 ng-maxlength=20 >
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="control-label" for="last_name" translate="">Last Name(optional)</label>
+                    <input type="text" class="form-control" id="last_name" name="last_name"
+                           placeholder="{{'Your Last Name' | translate}}"
+                           ng-model="registerAccount.last_name" ng-minlength=1 ng-maxlength=20 >
+                </div>
+
                 <div class="form-group">
                     <label class="control-label" for="email" translate="global.form.email">E-mail</label>
                     <input type="email" class="form-control" id="email" name="email"
@@ -125,49 +139,66 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="control-label" for="bmi" translate="">BMI</label>
-                    <input type="text" class="form-control" id="bmi" name="bmi" placeholder="{{'Your BMI' | translate}}"
-                           ng-model="registerAccount.bmi" ng-minlength=1 ng-maxlength=10 required>
-                    <div ng-show="form.bmi.$dirty && form.bmi.$invalid">
-                        <p class="help-block"
-                           ng-show="form.bmi.$error.minlength" translate="global.messages.validate.bmi.minlength">
-                            Your password is required to be at least 1 characters.
-                        </p>
-                        <p class="help-block"
-                           ng-show="form.password.$error.maxlength" translate="global.messages.validate.bmi.maxlength">
-                            Your password cannot be longer than 10 characters.
-                        </p>
-                    </div>
+                <div class="form-group col-md-3">
+                    <label class="control-label" for="weight" translate="">Weight(kg)</label>
+                    <input type="text" class="form-control" id="weight" name="weight"
+                           placeholder="{{'Your Weight' | translate}}"
+                           ng-model="registerAccount.weight" ng-minlength=1 ng-maxlength=2 required>
                 </div>
-                <div class="form-group">
+                <div class="form-group col-md-3">
+                    <label class="control-label" for="height" translate="">Height(cm)</label>
+                    <input type="text" class="form-control" id="height" name="height"
+                           placeholder="{{'Your Height' | translate}}"
+                           ng-model="registerAccount.height" ng-minlength=1 ng-maxlength=1.5 required>
+                </div>
+                <div class="form-group col-md-3">
                     <label class="control-label" translate="">Gender</label><br>
                     Female <input type="radio" id="genderF" name="gender" placeholder="{{'F' | translate}}"
                                   ng-model="registerAccount.gender" value="F"> &nbsp
                     Male <input type="radio" id="genderM" name="gender" placeholder="{{'M' | translate}}"
                                 ng-model="registerAccount.gender" value="M">
-
-                    <div ng-show="form.bmi.$dirty && form.bmi.$invalid">
-                        <p class="help-block"
-                           ng-show="form.gender.$error.required" translate="register.messages.validate.gender.required">
-                            Your gender is required.
-                        </p>
-                    </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group col-md-3">
                     <label class="control-label" for="age" translate="">Age</label>
                     <input type="text" class="form-control" id="age" name="age" placeholder="{{'Your age' | translate}}"
-                           ng-model="registerAccount.age" ng-minlength=1 ng-maxlength=3 required>
-                    <div ng-show="form.age.$dirty && form.age.$invalid">
-                        <p class="help-block"
-                           ng-show="form.age.$error.minlength" translate="global.messages.validate.age.minlength">
-                            Your password is required to be at least 1 characters.
-                        </p>
-                        <p class="help-block"
-                           ng-show="form.age.$error.maxlength" translate="global.messages.validate.age.maxlength">
-                            Your password cannot be longer than 3 characters.
-                        </p>
-                    </div>
+                           ng-model="registerAccount.age" ng-minlength=1 ng-maxlength=1.5 required>
+                </div>
+
+                <div ng-show="form.weight.$dirty && form.weight.$invalid">
+                    <p class="help-block"
+                       ng-show="form.weight.$error.minlength" translate="global.messages.validate.weight.minlength">
+                        Your Weight is required to be at least 1 characters.
+                    </p>
+                    <p class="help-block"
+                       ng-show="form.weight.$error.maxlength" translate="global.messages.validate.weight.maxlength">
+                        Your password cannot be longer than 10 characters.
+                    </p>
+                </div>
+                <div ng-show="form.height.$dirty && form.height.$invalid">
+                    <p class="help-block"
+                       ng-show="form.height.$error.minlength" translate="global.messages.validate.height.minlength">
+                        Your Weight is required to be at least 1 characters.
+                    </p>
+                    <p class="help-block"
+                       ng-show="form.height.$error.maxlength" translate="global.messages.validate.height.maxlength">
+                        Your password cannot be longer than 10 characters.
+                    </p>
+                </div>
+                <div ng-show="form.gender.$dirty && form.gender.$invalid">
+                    <p class="help-block"
+                       ng-show="form.gender.$error.required" translate="register.messages.validate.gender.required">
+                        Your gender is required.
+                    </p>
+                </div>
+                <div ng-show="form.age.$dirty && form.age.$invalid">
+                    <p class="help-block"
+                       ng-show="form.age.$error.minlength" translate="global.messages.validate.age.minlength">
+                        Your password is required to be at least 1 characters.
+                    </p>
+                    <p class="help-block"
+                       ng-show="form.age.$error.maxlength" translate="global.messages.validate.age.maxlength">
+                        Your password cannot be longer than 3 characters.
+                    </p>
                 </div>
 
 

@@ -69,6 +69,24 @@
                     "invalid": "Your e-mail is invalid.",
                     "minlength": "Your e-mail is required to be at least 5 characters.",
                     "maxlength": "Your e-mail cannot be longer than 50 characters."
+                },
+                "weight": {
+                    "required": "Your weight(kg) is required.",
+                    "minlength": "Your weight(kg) is at least 1 characters.",
+                    "maxlength": "Your weight(kg) is at most 3 characters"
+                },
+                "height": {
+                    "required": "Your height(cm) is required.",
+                    "minlength": "Your height(cm) is at least 1 characters.",
+                    "maxlength": "Your height(cm) is at most 3 characters"
+                },
+                "gender": {
+                    "required": "Your gender is required."
+                },
+                "age": {
+                    "required": "Your gender is required.",
+                    "minlength": "Your age is at least 1 characters.",
+                    "maxlength": "Your age is at most 3 characters"
                 }
             }
         },
