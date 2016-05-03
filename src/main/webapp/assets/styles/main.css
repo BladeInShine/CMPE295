@@ -250,7 +250,6 @@ h1{
     /*!*height: 300px;*!*/
     /*margin: -70px auto;*/
 /*}*/
-
 .description {
     height: 300px;
     width: 600px;
@@ -259,12 +258,14 @@ h1{
 }
 
 table {
-  border: 1px solid #666;
+  border: 2px solid #bdbdbd;
 
 }
+th, td {
+    padding: 10px;
+    text-align: center;
+}
 th {
-  background: #f8f8f8;
-  font-weight: bold;
-    padding: 2px;
+    background: #A9E2F3;
 }
 

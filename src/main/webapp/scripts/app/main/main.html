@@ -8,41 +8,6 @@ function drawRow(rowData) {
     row.append($("<td>" + rowData.descrip + "</td>"));
 };
 
-function drawTable() {
-    var mydata =  [{
-            date: 010316,
-            intake: "650",
-            consumed: "510",
-            descrip: "sea food burger"
-            },
-        {
-            date: 010716,
-            intake: "710",
-            consumed: "540",
-            descrip: " beef noodle"},
-        {
-            date: 010316,
-            intake: "650",
-            consumed: "510",
-            descrip: "sea food burger"
-            },
-        {
-            date: 010316,
-            intake: "650",
-            consumed: "510",
-            descrip: "sea food burger"
-            },
-        {
-            date: 010316,
-            intake: "650",
-            consumed: "510",
-            descrip: "sea food burger"
-            },];
-    for (var i = 0; i < mydata.length; i++) {
-        drawRow(mydata[i]);
-    }
-};
-
 function aaa() {
     var chart = new CanvasJS.Chart("chartContainer",
         {
@@ -133,7 +98,6 @@ function aaa() {
         });
 
     chart.render();
-    drawTable();
 }
 ;
 angular.element(document).ready(aaa);
