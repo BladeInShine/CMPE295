@@ -6,7 +6,6 @@ import edu.sjsu.cmpe295.repository.RecHistoryRepository;
 import edu.sjsu.cmpe295.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,10 +25,10 @@ import java.util.Optional;
 public class RecHistoryResource {
 
     private final Logger log = LoggerFactory.getLogger(RecHistoryResource.class);
-        
+
     @Inject
     private RecHistoryRepository recHistoryRepository;
-    
+
     /**
      * POST  /recHistorys -> Create a new recHistory.
      */
@@ -107,4 +106,14 @@ public class RecHistoryResource {
         recHistoryRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("recHistory", id.toString())).build();
     }
+
+    @RequestMapping(value = "/recHistorys/user",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<RecHistory> getUserRecHistorys() {
+        log.debug("REST request to get all RecHistorys");
+        return recHistoryRepository.findByUserIsCurrentUser();
+    }
+
 }

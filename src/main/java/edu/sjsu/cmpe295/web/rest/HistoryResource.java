@@ -9,7 +9,10 @@ import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 import edu.sjsu.cmpe295.domain.History;
+import edu.sjsu.cmpe295.domain.User;
 import edu.sjsu.cmpe295.repository.HistoryRepository;
+import edu.sjsu.cmpe295.repository.UserRepository;
+import edu.sjsu.cmpe295.security.SecurityUtils;
 import edu.sjsu.cmpe295.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +50,9 @@ public class HistoryResource {
     @Inject
     private MultipartResolver multipartResolver;
 
+    @Inject
+    private UserRepository userRepository;
+
     /**
      * POST  /historys -> Create a new history.
      */
@@ -59,6 +65,9 @@ public class HistoryResource {
         if (history.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("history", "idexists", "A new history cannot already have an ID")).body(null);
         }
+        history.setTime(ZonedDateTime.now());
+        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
+        history.setUser(user);
         History result = historyRepository.save(history);
         return ResponseEntity.created(new URI("/api/historys/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("history", result.getId().toString()))
@@ -125,6 +134,12 @@ public class HistoryResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("history", id.toString())).build();
     }
 
+
+    @RequestMapping(value = "/historys/user", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<History> getUserHistorys() {
+        log.debug("REST request to get all Historys");
+        return historyRepository.findByUserIsCurrentUser();
+    }
 
     @RequestMapping(value = "/historys/table", method = RequestMethod.GET)
     public ResponseEntity<String> fetchUserData(){
