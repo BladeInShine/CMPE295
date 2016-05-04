@@ -14,17 +14,17 @@
             <input type="text" class="form-control" id="id" name="id"
                     ng-model="history.id" readonly />
         </div>
-        <div class="form-group">
-            <label class="control-label" translate="cmpe295App.history.image" for="field_image">Image</label>
-            <input type="file" class="form-control" name="imageFile" id="field_image"
-                    ng-model="history.image"
-                    accept="image/jpeg,image/png"
-                    onchange="angular.element(this).scope().uploadFile(this.files)"/>
-            <span class="error" ng-show="form-group.imageFile.$error.history.image">
-		            Not a JPEG or a PNG!
-	        </span>
-            <img ng-show="history.image.src" ng-src="{{history.image.src}}"/>
-        </div>
+        <!--<div class="form-group">-->
+            <!--<label class="control-label" translate="cmpe295App.history.image" for="field_image">Image</label>-->
+            <!--<input type="file" class="form-control" name="imageFile" id="field_image"-->
+                    <!--ng-model="history.image"-->
+                    <!--accept="image/jpeg,image/png"-->
+                    <!--onchange="angular.element(this).scope().uploadFile(this.files)"/>-->
+            <!--<span class="error" ng-show="form-group.imageFile.$error.history.image">-->
+		            <!--Not a JPEG or a PNG!-->
+	        <!--</span>-->
+            <!--<img ng-show="history.image.src" ng-src="{{history.image.src}}"/>-->
+        <!--</div>-->
         <div class="form-group">
             <label class="control-label" translate="cmpe295App.history.description" for="field_description">Description</label>
             <input type="text" class="form-control" name="description" id="field_description"
@@ -37,19 +37,19 @@
                     ng-model="history.calorie"
                      />
         </div>
-        <div class="form-group">
-            <label class="control-label" translate="cmpe295App.history.time" for="field_time">Time</label>
-            <input type="datetime-local" class="form-control" name="time" id="field_time"
-                    ng-model="history.time"
-                     />
-        </div>
+        <!--<div class="form-group">-->
+            <!--<label class="control-label" translate="cmpe295App.history.time" for="field_time">Time</label>-->
+            <!--<input type="datetime-local" class="form-control" name="time" id="field_time"-->
+                    <!--ng-model="history.time"-->
+                     <!--/>-->
+        <!--</div>-->
 
-        <div class="form-group">
-            <label translate="cmpe295App.history.user" for="field_user">user</label>
-            <select class="form-control" id="field_user" name="user" ng-model="history.user" ng-options="user as user.login for user in users track by user.id">
-                <option value=""></option>
-            </select>
-        </div>
+        <!--<div class="form-group">-->
+            <!--<label translate="cmpe295App.history.user" for="field_user">user</label>-->
+            <!--<select class="form-control" id="field_user" name="user" ng-model="history.user" ng-options="user as user.login for user in users track by user.id">-->
+                <!--<option value=""></option>-->
+            <!--</select>-->
+        <!--</div>-->
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
