@@ -1,0 +1,28 @@
+{
+    "cmpe295App": {
+        "recHistory" : {
+            "home": {
+                "title": "RecHistorys",
+                "createLabel": "Créer un nouveau RecHistory",
+                "createOrEditLabel": "Créer ou éditer un RecHistory",
+                "search": "Search for RecHistory"
+            },
+            "created": "Un nouveau RecHistory a été créé avec l'identifiant {{ param }}",
+            "updated": "Le RecHistory avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le RecHistory avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le RecHistory {{ id }} ?"
+            },
+            "detail": {
+                "title": "RecHistory"
+            },
+            "foodId": "FoodId",
+            "foodName": "FoodName",
+            "brandId": "BrandId",
+            "brandName": "BrandName",
+            "timestamp": "Timestamp",
+            "user": "User"
+        }
+    }
+}
+
