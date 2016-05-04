@@ -7,8 +7,6 @@ import edu.sjsu.cmpe295.repository.UserRepository;
 import edu.sjsu.cmpe295.security.SecurityUtils;
 import edu.sjsu.cmpe295.service.util.RandomUtil;
 import edu.sjsu.cmpe295.web.rest.dto.ManagedUserDTO;
-import java.time.ZonedDateTime;
-import java.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -16,9 +14,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.ZonedDateTime;
 import javax.inject.Inject;
-import java.util.*;
+import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * Service class for managing users.
@@ -81,7 +82,7 @@ public class UserService {
     }
 
     public User createUserInformation(String login, String password, String firstName, String lastName, String email,
-        String langKey) {
+        int weight, int height, String gender, int age, String langKey) {
 
         User newUser = new User();
         Authority authority = authorityRepository.findOne("ROLE_USER");
@@ -94,6 +95,10 @@ public class UserService {
         newUser.setLastName(lastName);
         newUser.setEmail(email);
         newUser.setLangKey(langKey);
+        newUser.setWeight(weight);
+        newUser.setHeight(height);
+        newUser.setGender(gender);
+        newUser.setAge(age);
         // new user is not active
         newUser.setActivated(false);
         // new user gets registration key

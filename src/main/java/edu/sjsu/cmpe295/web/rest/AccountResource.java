@@ -1,7 +1,6 @@
 package edu.sjsu.cmpe295.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import edu.sjsu.cmpe295.domain.Authority;
 import edu.sjsu.cmpe295.domain.User;
 import edu.sjsu.cmpe295.repository.UserRepository;
 import edu.sjsu.cmpe295.security.SecurityUtils;
@@ -10,7 +9,6 @@ import edu.sjsu.cmpe295.service.UserService;
 import edu.sjsu.cmpe295.web.rest.dto.KeyAndPasswordDTO;
 import edu.sjsu.cmpe295.web.rest.dto.UserDTO;
 import edu.sjsu.cmpe295.web.rest.util.HeaderUtil;
-
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.util.*;
+import java.util.Optional;
 
 /**
  * REST controller for managing the current user's account.
@@ -59,7 +55,7 @@ public class AccountResource {
                 .orElseGet(() -> {
                     User user = userService.createUserInformation(userDTO.getLogin(), userDTO.getPassword(),
                     userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail().toLowerCase(),
-                    userDTO.getLangKey());
+                    userDTO.getWeight(), userDTO.getHeight(), userDTO.getGender(), userDTO.getAge(), userDTO.getLangKey());
                     String baseUrl = request.getScheme() + // "http"
                     "://" +                                // "://"
                     request.getServerName() +              // "myhost"
