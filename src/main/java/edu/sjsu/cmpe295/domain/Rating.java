@@ -3,9 +3,7 @@ package edu.sjsu.cmpe295.domain;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -13,12 +11,15 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "rating")
+@IdClass(value = RatingPK.class)
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Rating implements Serializable{
 
+    @Id
     @Column(name = "user_id")
     private long userId;
 
+    @Id
     @Column(name = "item_id")
     private long itemId;
 
