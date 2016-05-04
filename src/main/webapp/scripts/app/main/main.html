@@ -2,13 +2,15 @@
 function drawRow(rowData) {
     var row = $("<tr />")
     $("#histDataTable").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
-    row.append($("<td>" + rowData.date + "</td>"));
+    var date_str = rowData.date;  // turn from 01052016 to 2016-05-01
+    var converted_date = date_str.substr(4) + '-' + date_str.substr(2, 2) + '-' + date_str.substr(0, 2);
+    row.append($("<td>" + converted_date + "</td>"));
     row.append($("<td>" + rowData.intake + "</td>"));
     row.append($("<td>" + rowData.consumed + "</td>"));
     row.append($("<td>" + rowData.descrip + "</td>"));
 };
 
-function aaa() {
+function drawGraph(dataPoints) {
     var chart = new CanvasJS.Chart("chartContainer",
         {
             height: 300,
@@ -45,19 +47,7 @@ function aaa() {
                     name: "Intake Cal",
                     markerType: "square",
                     color: "#F08080",
-                    dataPoints: [
-                        {x: new Date(2010, 0, 3), y: 650},
-                        {x: new Date(2010, 0, 5), y: 700},
-                        {x: new Date(2010, 0, 7), y: 710},
-                        {x: new Date(2010, 0, 9), y: 658},
-                        {x: new Date(2010, 0, 11), y: 734},
-                        {x: new Date(2010, 0, 13), y: 963},
-                        {x: new Date(2010, 0, 15), y: 847},
-                        {x: new Date(2010, 0, 17), y: 853},
-                        {x: new Date(2010, 0, 19), y: 869},
-                        {x: new Date(2010, 0, 21), y: 943},
-                        {x: new Date(2010, 0, 23), y: 970}
-                    ]
+                    dataPoints: dataPoints.intake
                 },
                 {
                     type: "line",
@@ -65,20 +55,7 @@ function aaa() {
                     name: "Consumed Cal",
                     color: "#20B2AA",
                     lineThickness: 2,
-
-                    dataPoints: [
-                        {x: new Date(2010, 0, 3), y: 510},
-                        {x: new Date(2010, 0, 5), y: 560},
-                        {x: new Date(2010, 0, 7), y: 540},
-                        {x: new Date(2010, 0, 9), y: 558},
-                        {x: new Date(2010, 0, 11), y: 544},
-                        {x: new Date(2010, 0, 13), y: 693},
-                        {x: new Date(2010, 0, 15), y: 657},
-                        {x: new Date(2010, 0, 17), y: 663},
-                        {x: new Date(2010, 0, 19), y: 639},
-                        {x: new Date(2010, 0, 21), y: 673},
-                        {x: new Date(2010, 0, 23), y: 660}
-                    ]
+                    dataPoints: dataPoints.consumed
                 }
 
 
@@ -98,9 +75,8 @@ function aaa() {
         });
 
     chart.render();
-}
-;
-angular.element(document).ready(aaa);
+};
+// angular.element(document).ready(bbb);
 
 
 </script>
