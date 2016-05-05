@@ -14,10 +14,6 @@ angular.module('cmpe295App')
                     'content@': {
                         templateUrl: 'scripts/app/entities/recHistory/recHistorys.html',
                         controller: 'RecHistoryController'
-                    },
-                    'ratingPanel@': {
-                        templateUrl: 'scripts/app/entities/recHistory/stars/rating.html',
-                        controller: ''
                     }
                 },
                 resolve: {
