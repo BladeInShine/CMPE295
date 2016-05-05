@@ -14,6 +14,10 @@ angular.module('cmpe295App')
                     'content@': {
                         templateUrl: 'scripts/app/entities/recHistory/recHistorys.html',
                         controller: 'RecHistoryController'
+                    },
+                    'ratingPanel@': {
+                        templateUrl: 'scripts/app/entities/recHistory/stars/rating.html',
+                        controller: ''
                     }
                 },
                 resolve: {
@@ -42,8 +46,8 @@ angular.module('cmpe295App')
                         $translatePartialLoader.addPart('recHistory');
                         return $translate.refresh();
                     }],
-                    entity: ['$stateParams', 'RecHistory', function($stateParams, RecHistory) {
-                        return RecHistory.get({id : $stateParams.id});
+                    entity: ['$stateParams', 'RecHistory', function ($stateParams, RecHistory) {
+                        return RecHistory.get({id: $stateParams.id});
                     }]
                 }
             })
@@ -53,7 +57,7 @@ angular.module('cmpe295App')
                 data: {
                     authorities: ['ROLE_USER'],
                 },
-                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
                     $uibModal.open({
                         templateUrl: 'scripts/app/entities/recHistory/recHistory-dialog.html',
                         controller: 'RecHistoryDialogController',
@@ -70,9 +74,9 @@ angular.module('cmpe295App')
                                 };
                             }
                         }
-                    }).result.then(function(result) {
-                        $state.go('recHistory', null, { reload: true });
-                    }, function() {
+                    }).result.then(function (result) {
+                        $state.go('recHistory', null, {reload: true});
+                    }, function () {
                         $state.go('recHistory');
                     })
                 }]
@@ -83,19 +87,19 @@ angular.module('cmpe295App')
                 data: {
                     authorities: ['ROLE_USER'],
                 },
-                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
                     $uibModal.open({
                         templateUrl: 'scripts/app/entities/recHistory/recHistory-dialog.html',
                         controller: 'RecHistoryDialogController',
                         size: 'lg',
                         resolve: {
-                            entity: ['RecHistory', function(RecHistory) {
-                                return RecHistory.get({id : $stateParams.id});
+                            entity: ['RecHistory', function (RecHistory) {
+                                return RecHistory.get({id: $stateParams.id});
                             }]
                         }
-                    }).result.then(function(result) {
-                        $state.go('recHistory', null, { reload: true });
-                    }, function() {
+                    }).result.then(function (result) {
+                        $state.go('recHistory', null, {reload: true});
+                    }, function () {
                         $state.go('^');
                     })
                 }]
@@ -106,19 +110,19 @@ angular.module('cmpe295App')
                 data: {
                     authorities: ['ROLE_USER'],
                 },
-                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
                     $uibModal.open({
                         templateUrl: 'scripts/app/entities/recHistory/recHistory-delete-dialog.html',
                         controller: 'RecHistoryDeleteController',
                         size: 'md',
                         resolve: {
-                            entity: ['RecHistory', function(RecHistory) {
-                                return RecHistory.get({id : $stateParams.id});
+                            entity: ['RecHistory', function (RecHistory) {
+                                return RecHistory.get({id: $stateParams.id});
                             }]
                         }
-                    }).result.then(function(result) {
-                        $state.go('recHistory', null, { reload: true });
-                    }, function() {
+                    }).result.then(function (result) {
+                        $state.go('recHistory', null, {reload: true});
+                    }, function () {
                         $state.go('^');
                     })
                 }]

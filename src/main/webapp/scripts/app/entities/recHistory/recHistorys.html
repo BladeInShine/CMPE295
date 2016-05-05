@@ -6,7 +6,7 @@
             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="recHistory.new" >
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span 
+                    <span
                         translate="cmpe295App.recHistory.home.createLabel">Create new RecHistory
                     </span>
                 </button>
@@ -19,48 +19,51 @@
             <thead>
                 <tr>
                     <th><span translate="global.field.id">ID</span></th>
-                    <th><span translate="cmpe295App.recHistory.foodId">FoodId</span></th>
+                    <!--<th><span translate="cmpe295App.recHistory.foodId">FoodId</span></th>-->
                     <th><span translate="cmpe295App.recHistory.foodName">FoodName</span></th>
-                    <th><span translate="cmpe295App.recHistory.brandId">BrandId</span></th>
+                    <!--<th><span translate="cmpe295App.recHistory.brandId">BrandId</span></th>-->
                     <th><span translate="cmpe295App.recHistory.brandName">BrandName</span></th>
                     <th><span translate="cmpe295App.recHistory.timestamp">Timestamp</span></th>
                     <th><span translate="cmpe295App.recHistory.user">user</span></th>
-                    <th></th>
+                    <th><span>Rating</span></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="recHistory in recHistorys track by recHistory.id">
                     <td><a ui-sref="recHistory.detail({id:recHistory.id})">{{recHistory.id}}</a></td>
-                    <td>{{recHistory.foodId}}</td>
+                    <!--<td>{{recHistory.foodId}}</td>-->
                     <td>{{recHistory.foodName}}</td>
-                    <td>{{recHistory.brandId}}</td>
+                    <!--<td>{{recHistory.brandId}}</td>-->
                     <td>{{recHistory.brandName}}</td>
                     <td>{{recHistory.timestamp | date:'medium'}}</td>
                     <td>
                         {{recHistory.user.id}}
                     </td>
-                    <td class="text-right">
-                        <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    ui-sref="recHistory.detail({id:recHistory.id})"
-                                    class="btn btn-info btn-sm"> 
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="recHistory.edit({id:recHistory.id})"
-                                    class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="recHistory.delete({id:recHistory.id})"
-                                    class="btn btn-danger btn-sm">                                    
-                                <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
-                            </button>
-                        </div>
+                    <td>
+                        <div id = "ratingPanel"></div>
                     </td>
+                    <!--<td class="text-right">-->
+                        <!--<div class="btn-group flex-btn-group-container">-->
+                            <!--<button type="submit"-->
+                                    <!--ui-sref="recHistory.detail({id:recHistory.id})"-->
+                                    <!--class="btn btn-info btn-sm">-->
+                                <!--<span class="glyphicon glyphicon-eye-open"></span>-->
+                                <!--<span class="hidden-xs hidden-sm" translate="entity.action.view"></span>-->
+                            <!--</button>-->
+                            <!--<button type="submit"-->
+                                    <!--ui-sref="recHistory.edit({id:recHistory.id})"-->
+                                    <!--class="btn btn-primary btn-sm">-->
+                                <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                                <!--<span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>-->
+                            <!--</button>-->
+                            <!--<button type="submit"-->
+                                    <!--ui-sref="recHistory.delete({id:recHistory.id})"-->
+                                    <!--class="btn btn-danger btn-sm">-->
+                                <!--<span class="glyphicon glyphicon-remove-circle"></span>-->
+                                <!--<span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>-->
+                            <!--</button>-->
+                        <!--</div>-->
+                    <!--</td>-->
                 </tr>
             </tbody>
         </table>
