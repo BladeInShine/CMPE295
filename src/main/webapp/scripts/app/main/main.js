@@ -17,9 +17,6 @@ angular.module('cmpe295App')
                     'loginPanel1@':{
                         templateUrl: 'scripts/app/account/login/login1.html',
                         controller: 'LoginController'
-                    },
-                    'descripPanel@':{
-                        templateUrl: 'scripts/app/account/descrip/descrip.html'
                     }
                 },
                 resolve: {

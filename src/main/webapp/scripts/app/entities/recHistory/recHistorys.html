@@ -1,3 +1,4 @@
+
 <div>
     <h2 translate="cmpe295App.recHistory.home.title">RecHistorys</h2>
     <jh-alert></jh-alert>
@@ -14,14 +15,13 @@
         </div>
     </div>
     <br/>
+
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
                 <tr>
                     <th><span translate="global.field.id">ID</span></th>
-                    <!--<th><span translate="cmpe295App.recHistory.foodId">FoodId</span></th>-->
                     <th><span translate="cmpe295App.recHistory.foodName">FoodName</span></th>
-                    <!--<th><span translate="cmpe295App.recHistory.brandId">BrandId</span></th>-->
                     <th><span translate="cmpe295App.recHistory.brandName">BrandName</span></th>
                     <th><span translate="cmpe295App.recHistory.timestamp">Timestamp</span></th>
                     <th><span translate="cmpe295App.recHistory.user">user</span></th>
@@ -31,41 +31,78 @@
             <tbody>
                 <tr ng-repeat="recHistory in recHistorys track by recHistory.id">
                     <td><a ui-sref="recHistory.detail({id:recHistory.id})">{{recHistory.id}}</a></td>
-                    <!--<td>{{recHistory.foodId}}</td>-->
                     <td>{{recHistory.foodName}}</td>
-                    <!--<td>{{recHistory.brandId}}</td>-->
                     <td>{{recHistory.brandName}}</td>
                     <td>{{recHistory.timestamp | date:'medium'}}</td>
                     <td>
                         {{recHistory.user.id}}
                     </td>
                     <td>
-                        <div id = "ratingPanel"></div>
+                        <div id="shop"></div>
                     </td>
-                    <!--<td class="text-right">-->
-                        <!--<div class="btn-group flex-btn-group-container">-->
-                            <!--<button type="submit"-->
-                                    <!--ui-sref="recHistory.detail({id:recHistory.id})"-->
-                                    <!--class="btn btn-info btn-sm">-->
-                                <!--<span class="glyphicon glyphicon-eye-open"></span>-->
-                                <!--<span class="hidden-xs hidden-sm" translate="entity.action.view"></span>-->
-                            <!--</button>-->
-                            <!--<button type="submit"-->
-                                    <!--ui-sref="recHistory.edit({id:recHistory.id})"-->
-                                    <!--class="btn btn-primary btn-sm">-->
-                                <!--<span class="glyphicon glyphicon-pencil"></span>-->
-                                <!--<span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>-->
-                            <!--</button>-->
-                            <!--<button type="submit"-->
-                                    <!--ui-sref="recHistory.delete({id:recHistory.id})"-->
-                                    <!--class="btn btn-danger btn-sm">-->
-                                <!--<span class="glyphicon glyphicon-remove-circle"></span>-->
-                                <!--<span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>-->
-                            <!--</button>-->
-                        <!--</div>-->
-                    <!--</td>-->
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+
+<script src="stars/rating.min.js"></script>
+<script>
+
+    /**
+     * Demo in action!
+     */
+    (function() {
+
+        'use strict';
+
+        // SHOP ELEMENT
+        var shop = document.querySelector('#shop');
+
+        // DUMMY DATA
+        var data = [
+            {
+                title: "Dope Hat",
+                description: "Dope hat dolor sit amet, consectetur adipisicing elit. Commodi consectetur similique ullam natus ut debitis praesentium.",
+                rating: 3
+            }
+        ];
+
+        // INITIALIZE
+        (function init() {
+            for (var i = 0; i < data.length; i++) {
+                addRatingWidget(buildShopItem(data[i]), data[i]);
+            }
+        })();
+
+        // BUILD SHOP ITEM
+        function buildShopItem(data) {
+            var shopItem = document.createElement('div');
+
+            var html = //'<div class="c-shop-item__img"></div>' +
+                '<div class="c-shop-item__details">' +
+                // '<h3 class="c-shop-item__title">' + data.title + '</h3>' +
+                // '<p class="c-shop-item__description">' + data.description + '</p>' +
+                '<ul class="c-rating"></ul>' +
+                '</div>';
+
+            shopItem.classList.add('c-shop-item');
+            shopItem.innerHTML = html;
+            shop.appendChild(shopItem);
+
+            return shopItem;
+        }
+
+        // ADD RATING WIDGET
+        function addRatingWidget(shopItem, data) {
+            var ratingElement = shopItem.querySelector('.c-rating');
+            var currentRating = data.rating;
+            var maxRating = 5;
+            var callback = function(rating) { alert(rating); };
+            var r = rating(ratingElement, currentRating, maxRating, callback);
+        }
+
+    })();
+
+</script>
+
