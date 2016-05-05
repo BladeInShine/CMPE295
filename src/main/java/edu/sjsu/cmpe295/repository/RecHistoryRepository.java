@@ -14,4 +14,6 @@ public interface RecHistoryRepository extends JpaRepository<RecHistory,Long> {
     @Query("select recHistory from RecHistory recHistory where recHistory.user.login = ?#{principal.username}")
     List<RecHistory> findByUserIsCurrentUser();
 
+    List<RecHistory> findAllByUserIdAndBrandId(long userId, String brandId);
+
 }

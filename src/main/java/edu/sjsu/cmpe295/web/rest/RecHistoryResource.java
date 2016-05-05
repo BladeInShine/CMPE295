@@ -1,7 +1,11 @@
 package edu.sjsu.cmpe295.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import edu.sjsu.cmpe295.domain.Rating;
 import edu.sjsu.cmpe295.domain.RecHistory;
+import edu.sjsu.cmpe295.repository.RatingRepository;
 import edu.sjsu.cmpe295.repository.RecHistoryRepository;
 import edu.sjsu.cmpe295.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
@@ -28,6 +32,9 @@ public class RecHistoryResource {
 
     @Inject
     private RecHistoryRepository recHistoryRepository;
+
+    @Inject
+    private RatingRepository ratingRepository;
 
     /**
      * POST  /recHistorys -> Create a new recHistory.
@@ -114,6 +121,27 @@ public class RecHistoryResource {
     public List<RecHistory> getUserRecHistorys() {
         log.debug("REST request to get all RecHistorys");
         return recHistoryRepository.findByUserIsCurrentUser();
+    }
+
+    @RequestMapping(value = "/recHistorys/rating", method = RequestMethod.POST)
+    public ResponseEntity<String> rateRecommendation(@RequestBody String body){
+        JsonObject jsonObject = (new JsonParser()).parse(body).getAsJsonObject();
+        long id = jsonObject.get("id").getAsLong();
+        float rating = jsonObject.get("rating").getAsFloat();
+        RecHistory recHistory = recHistoryRepository.findOne(id);
+        recHistory.setRating(rating);
+        recHistoryRepository.save(recHistory);
+        List<RecHistory> userHis = recHistoryRepository.findAllByUserIdAndBrandId(recHistory.getUser().getId(), recHistory.getBrandId());
+        float sum = 0;
+        for(RecHistory rh : userHis){
+            sum += rh.getRating();
+        }
+        Rating rate = new Rating();
+        rate.setItemId(Math.abs(recHistory.getBrandId().hashCode()));
+        rate.setRating(sum/userHis.size());
+        rate.setUserId(recHistory.getUser().getId());
+        ratingRepository.save(rate);
+        return new ResponseEntity<String>("Rating added", HttpStatus.OK);
     }
 
 }

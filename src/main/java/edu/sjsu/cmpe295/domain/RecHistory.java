@@ -36,7 +36,7 @@ public class RecHistory implements Serializable {
     private ZonedDateTime timestamp;
 
     @Column(name = "rating")
-    private float rating;
+    private Float rating;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -90,7 +90,7 @@ public class RecHistory implements Serializable {
         this.timestamp = timestamp;
     }
 
-    public float getRating() {
+    public Float getRating() {
         return rating;
     }
 
