@@ -81,7 +81,17 @@ function drawGraph(dataPoints) {
 
 </script>
 
-<h1 class="welcome">Welcome to Healthy Food Recommander</h1>
+<h1 class="welcome">Healthy Food Recommander</h1>
+<br>
+<br>
+<div class="search">
+    <form action="">
+        <input type="search" name="searchRec" size="35">&nbsp&nbsp
+        <input type="submit" class="btn btn-success" value="Search Foods">&nbsp&nbsp&nbsp&nbsp
+        <a class="btn btn-info" href="/#/recHistorys">Recommend History</a>
+    </form>
+</div>
+<br>
 <br>
 <br>
 <!--<div ng-cloak>-->
@@ -89,6 +99,7 @@ function drawGraph(dataPoints) {
 <div class="col-md-6" id="chartContainer" style="height: 300px;">
     <!--<span class="hipster img-responsive img-rounded"></span> -->
 </div>
+
 <div class="col-md-6" ng-show="usingRecommender==true" ng-hide="usingRecommender==false">
     <table id="histDataTable" >
         <h2> Your Recent Calories Data</h2>

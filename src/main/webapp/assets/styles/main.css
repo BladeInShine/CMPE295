@@ -4,7 +4,7 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
     /*margin: 60px;*/
-
+    max-width: 1200px
 }
 
 /* ==========================================================================
@@ -269,3 +269,14 @@ th {
     background: #A9E2F3;
 }
 
+.search {
+    margin: auto;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+
+}
+
+.searchbox {
+    size: 35
+}
