@@ -4,7 +4,12 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import edu.sjsu.cmpe295.domain.User;
 import org.apache.mahout.cf.taste.impl.model.jdbc.*;
+import org.apache.mahout.cf.taste.impl.recommender.GenericItemBasedRecommender;
+import org.apache.mahout.cf.taste.impl.similarity.EuclideanDistanceSimilarity;
 import org.apache.mahout.cf.taste.model.JDBCDataModel;
+import org.apache.mahout.cf.taste.recommender.RecommendedItem;
+import org.apache.mahout.cf.taste.recommender.Recommender;
+import org.apache.mahout.cf.taste.similarity.ItemSimilarity;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -105,9 +110,15 @@ public class RecommendService {
 
     }
 
-    public List<String> fetchBrandFromMahout(long id){
+    public List<String> fetchBrandFromMahout(long id) throws Exception{
         JDBCDataModel dataModel = new MySQLJDBCDataModel(dataSource, "rating", "user_id", "item_id", "rating", null);
         System.out.println("!!!!!!yeah max!!!!!!!!!! "+dataModel.getMaxPreference());
+        ItemSimilarity itemSimilarity = new EuclideanDistanceSimilarity(dataModel);
+        Recommender itemRecommender = new GenericItemBasedRecommender(dataModel,itemSimilarity);
+        List<RecommendedItem> itemRecommendations = itemRecommender.recommend(3, 2);
+        for (RecommendedItem itemRecommendation : itemRecommendations) {
+            System.out.println("Item: " + itemRecommendation);
+        }
         return new ArrayList<>();
     }
 
