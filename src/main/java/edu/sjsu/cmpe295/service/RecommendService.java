@@ -3,6 +3,8 @@ package edu.sjsu.cmpe295.service;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import edu.sjsu.cmpe295.domain.User;
+import org.apache.mahout.cf.taste.impl.model.jdbc.*;
+import org.apache.mahout.cf.taste.model.JDBCDataModel;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -11,6 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.inject.Inject;
+import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by BladeInShine on 16/4/17.
@@ -24,6 +29,9 @@ public class RecommendService {
 
     @Inject
     private RestTemplate restTemplate;
+
+    @Inject
+    private DataSource dataSource;
 
     public double calorieCalculator(User user){
         double base;
@@ -65,6 +73,42 @@ public class RecommendService {
         ResponseEntity<String> result = restTemplate.postForEntity(NUTRITIONIX_URL, entity, String.class);
         return result.getBody();
 
+    }
+
+    public String fetchNutritionixByQuery(int min, int max, String query) throws Exception{
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("appId", NUTRITIONIX_APP_ID);
+        jsonObject.addProperty("appKey", NUTRITIONIX_APP_PWD);
+        JsonArray fields = new JsonArray();
+        fields.add("item_name");
+        fields.add("brand_name");
+        fields.add("nf_calories");
+        jsonObject.add("fields", fields);
+        JsonObject queries = new JsonObject();
+        queries.addProperty("item_name", query);
+        jsonObject.add("queries", queries);
+        JsonObject filters = new JsonObject();
+        JsonObject nfCalories = new JsonObject();
+        nfCalories.addProperty("from", min);
+        nfCalories.addProperty("to", max);
+        filters.addProperty("item_type",1);
+        filters.add("nf_calories", nfCalories);
+        jsonObject.add("filters",filters);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("Accept", "application/json");
+        HttpEntity<String> entity = new HttpEntity<>(jsonObject.toString(), headers);
+        ResponseEntity<String> result = restTemplate.postForEntity(NUTRITIONIX_URL, entity, String.class);
+        return result.getBody();
+
+    }
+
+    public List<String> fetchBrandFromMahout(long id){
+        JDBCDataModel dataModel = new MySQLJDBCDataModel(dataSource, "rating", "user_id", "item_id", "rating", null);
+        System.out.println("!!!!!!yeah max!!!!!!!!!! "+dataModel.getMaxPreference());
+        return new ArrayList<>();
     }
 
 }

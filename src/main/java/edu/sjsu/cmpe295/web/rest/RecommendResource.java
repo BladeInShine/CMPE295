@@ -1,15 +1,13 @@
 package edu.sjsu.cmpe295.web.rest;
 
 import edu.sjsu.cmpe295.repository.UserRepository;
+import edu.sjsu.cmpe295.security.SecurityUtils;
 import edu.sjsu.cmpe295.service.RecommendService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 
@@ -30,7 +28,7 @@ public class RecommendResource {
 
     @RequestMapping(value = "/recommend", method = RequestMethod.GET)
     public ResponseEntity<String> recommend(@RequestParam(name = "username") String username){
-        return userRepository.findOneByLogin(username)
+        return userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin())
             .map(u -> {
                 double calorie = recommendService.calorieCalculator(u);
                 int min = (int) (calorie*1.2/2.5);
@@ -44,6 +42,29 @@ public class RecommendResource {
                 return new ResponseEntity<String>(recommend, HttpStatus.OK);
             })
             .orElse(new ResponseEntity<String>("User not found", HttpStatus.NOT_FOUND));
+    }
+
+    @RequestMapping(value = "/recommend/search", method = RequestMethod.GET)
+    public ResponseEntity<String> recommendQuery(@RequestParam(value="query")String query){
+        return userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin())
+            .map(u -> {
+                double calorie = recommendService.calorieCalculator(u);
+                int min = (int) (calorie*1.2/2.5);
+                int max = (int) (calorie*1.375/2.5);
+                String recommend = null;
+                try {
+                    recommend = recommendService.fetchNutritionixByQuery(min, max, query);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return new ResponseEntity<String>(recommend, HttpStatus.OK);
+            })
+            .orElse(new ResponseEntity<String>("User not found", HttpStatus.NOT_FOUND));
+    }
+
+    @RequestMapping(value = "/mahout/test", method = RequestMethod.GET)
+    public void test(){
+        recommendService.fetchBrandFromMahout(1);
     }
 
 }
