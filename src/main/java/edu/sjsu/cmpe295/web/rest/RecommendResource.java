@@ -45,12 +45,32 @@ public class RecommendResource {
                 int min = (int) (calorie*1.2/2.5);
                 int max = (int) (calorie*1.375/2.5);
                 String recommend = null;
+                int hisnum = recHistoryRepository.findAll().size();
+                int userhisnum = recHistoryRepository.findByUserIsCurrentUser().size();
                 try {
                     recommend = recommendService.fetchNutritionixByCalory(min, max);
+                    if(hisnum <= 50 || userhisnum <= 10){
+                        JsonObject jsonObject = (new JsonParser()).parse(recommend).getAsJsonObject();
+                        List<RecHistory> results = recommendService.fetchNutritionixResult(jsonObject.get("hits").getAsJsonArray(), 5);
+                        recHistoryRepository.save(results);
+                    }
+                    else{
+                        List<String> brands = recommendService.fetchBrandFromMahout(u.getId());
+                        for(String str : brands){
+                            String cur = recommendService.fetchNutritionixByBrand(min, max, str);
+                            JsonObject jsonObject = (new JsonParser()).parse(cur).getAsJsonObject();
+                            List<RecHistory> results = recommendService.fetchNutritionixResult(jsonObject.get("hits").getAsJsonArray(), 1);
+                            recHistoryRepository.save(results);
+                        }
+                        JsonObject jsonObject = (new JsonParser()).parse(recommend).getAsJsonObject();
+                        List<RecHistory> results = recommendService.fetchNutritionixResult(jsonObject.get("hits").getAsJsonArray(), 2);
+                        recHistoryRepository.save(results);
+                    }
+                    return new ResponseEntity<String>("history saved", HttpStatus.OK);
                 } catch (Exception e) {
                     e.printStackTrace();
+                    return new ResponseEntity<String>("bad request", HttpStatus.BAD_REQUEST);
                 }
-                return new ResponseEntity<String>(recommend, HttpStatus.OK);
             })
             .orElse(new ResponseEntity<String>("User not found", HttpStatus.NOT_FOUND));
     }

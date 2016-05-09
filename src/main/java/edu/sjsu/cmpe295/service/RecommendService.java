@@ -162,7 +162,7 @@ public class RecommendService {
         System.out.println("!!!!!!yeah max!!!!!!!!!! "+dataModel.getMaxPreference());
         ItemSimilarity itemSimilarity = new EuclideanDistanceSimilarity(dataModel);
         Recommender itemRecommender = new GenericItemBasedRecommender(dataModel,itemSimilarity);
-        List<RecommendedItem> itemRecommendations = itemRecommender.recommend(id, 5);
+        List<RecommendedItem> itemRecommendations = itemRecommender.recommend(id, 3);
         List<String> ret = new ArrayList<>();
         List<String> brandIds = recHistoryRepository.findBrandId();
         for (RecommendedItem itemRecommendation : itemRecommendations) {
