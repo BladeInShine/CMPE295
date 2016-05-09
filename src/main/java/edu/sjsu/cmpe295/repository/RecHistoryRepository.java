@@ -16,4 +16,7 @@ public interface RecHistoryRepository extends JpaRepository<RecHistory,Long> {
 
     List<RecHistory> findAllByUserIdAndBrandId(long userId, String brandId);
 
+    @Query("select distinct recHistory.brandId from RecHistory recHistory")
+    List<String> findBrandId();
+
 }

@@ -3,7 +3,8 @@ package edu.sjsu.cmpe295.service;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import edu.sjsu.cmpe295.domain.User;
-import org.apache.mahout.cf.taste.impl.model.jdbc.*;
+import edu.sjsu.cmpe295.repository.RecHistoryRepository;
+import org.apache.mahout.cf.taste.impl.model.jdbc.MySQLJDBCDataModel;
 import org.apache.mahout.cf.taste.impl.recommender.GenericItemBasedRecommender;
 import org.apache.mahout.cf.taste.impl.similarity.EuclideanDistanceSimilarity;
 import org.apache.mahout.cf.taste.model.JDBCDataModel;
@@ -21,6 +22,7 @@ import javax.inject.Inject;
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by BladeInShine on 16/4/17.
@@ -37,6 +39,9 @@ public class RecommendService {
 
     @Inject
     private DataSource dataSource;
+
+    @Inject
+    private RecHistoryRepository recHistoryRepository;
 
     public double calorieCalculator(User user){
         double base;
@@ -61,6 +66,8 @@ public class RecommendService {
         JsonArray fields = new JsonArray();
         fields.add("item_name");
         fields.add("brand_name");
+        fields.add("item_id");
+        fields.add("brand_id");
         fields.add("nf_calories");
         jsonObject.add("fields", fields);
         JsonObject filters = new JsonObject();
@@ -88,6 +95,8 @@ public class RecommendService {
         JsonArray fields = new JsonArray();
         fields.add("item_name");
         fields.add("brand_name");
+        fields.add("item_id");
+        fields.add("brand_id");
         fields.add("nf_calories");
         jsonObject.add("fields", fields);
         JsonObject queries = new JsonObject();
@@ -110,16 +119,49 @@ public class RecommendService {
 
     }
 
+    public String fetchNutritionixByBrand(int min, int max, String brandId) throws Exception{
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("appId", NUTRITIONIX_APP_ID);
+        jsonObject.addProperty("appKey", NUTRITIONIX_APP_PWD);
+        JsonArray fields = new JsonArray();
+        fields.add("item_name");
+        fields.add("brand_name");
+        fields.add("item_id");
+        fields.add("brand_id");
+        fields.add("nf_calories");
+        jsonObject.add("fields", fields);
+        JsonObject filters = new JsonObject();
+        JsonObject nfCalories = new JsonObject();
+        nfCalories.addProperty("from", min);
+        nfCalories.addProperty("to", max);
+        filters.addProperty("item_type",1);
+        filters.addProperty("brand_id", brandId);
+        filters.add("nf_calories", nfCalories);
+        jsonObject.add("filters",filters);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("Accept", "application/json");
+        HttpEntity<String> entity = new HttpEntity<>(jsonObject.toString(), headers);
+        ResponseEntity<String> result = restTemplate.postForEntity(NUTRITIONIX_URL, entity, String.class);
+        return result.getBody();
+
+    }
+
     public List<String> fetchBrandFromMahout(long id) throws Exception{
         JDBCDataModel dataModel = new MySQLJDBCDataModel(dataSource, "rating", "user_id", "item_id", "rating", null);
         System.out.println("!!!!!!yeah max!!!!!!!!!! "+dataModel.getMaxPreference());
         ItemSimilarity itemSimilarity = new EuclideanDistanceSimilarity(dataModel);
         Recommender itemRecommender = new GenericItemBasedRecommender(dataModel,itemSimilarity);
-        List<RecommendedItem> itemRecommendations = itemRecommender.recommend(3, 2);
+        List<RecommendedItem> itemRecommendations = itemRecommender.recommend(id, 5);
+        List<String> ret = new ArrayList<>();
+        List<String> brandIds = recHistoryRepository.findBrandId();
         for (RecommendedItem itemRecommendation : itemRecommendations) {
-            System.out.println("Item: " + itemRecommendation);
+            ret.addAll(brandIds.stream().filter(brandId -> itemRecommendation.getItemID() == Math.abs(brandId.hashCode())).collect(Collectors.toList()));
+            //System.out.println("Item: " + itemRecommendation);
         }
-        return new ArrayList<>();
+        return ret;
     }
 
 }

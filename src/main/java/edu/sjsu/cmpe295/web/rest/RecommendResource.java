@@ -63,7 +63,7 @@ public class RecommendResource {
     }
 
     @RequestMapping(value = "/mahout/test", method = RequestMethod.GET)
-    public void test(){
+    public void test() throws Exception {
         recommendService.fetchBrandFromMahout(1);
     }
 
