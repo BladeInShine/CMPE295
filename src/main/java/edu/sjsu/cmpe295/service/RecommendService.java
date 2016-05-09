@@ -2,8 +2,11 @@ package edu.sjsu.cmpe295.service;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import edu.sjsu.cmpe295.domain.RecHistory;
 import edu.sjsu.cmpe295.domain.User;
 import edu.sjsu.cmpe295.repository.RecHistoryRepository;
+import edu.sjsu.cmpe295.repository.UserRepository;
+import edu.sjsu.cmpe295.security.SecurityUtils;
 import org.apache.mahout.cf.taste.impl.model.jdbc.MySQLJDBCDataModel;
 import org.apache.mahout.cf.taste.impl.recommender.GenericItemBasedRecommender;
 import org.apache.mahout.cf.taste.impl.similarity.EuclideanDistanceSimilarity;
@@ -20,7 +23,9 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.inject.Inject;
 import javax.sql.DataSource;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,6 +47,9 @@ public class RecommendService {
 
     @Inject
     private RecHistoryRepository recHistoryRepository;
+
+    @Inject
+    private UserRepository userRepository;
 
     public double calorieCalculator(User user){
         double base;
@@ -160,6 +168,28 @@ public class RecommendService {
         for (RecommendedItem itemRecommendation : itemRecommendations) {
             ret.addAll(brandIds.stream().filter(brandId -> itemRecommendation.getItemID() == Math.abs(brandId.hashCode())).collect(Collectors.toList()));
             //System.out.println("Item: " + itemRecommendation);
+        }
+        return ret;
+    }
+
+    public List<RecHistory> fetchNutritionixResult(JsonArray results, int n){
+        HashSet<String> hs = new HashSet<>();
+        List<RecHistory> ret = new ArrayList<>();
+        User u = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
+        for(int i=0;i<results.size();i++){
+            JsonObject cur = results.get(i).getAsJsonObject().get("fields").getAsJsonObject();
+            if(!hs.contains(cur.get("brand_id").getAsString())){
+                RecHistory recHistory = new RecHistory();
+                recHistory.setBrandId(cur.get("brand_id").getAsString());
+                recHistory.setBrandName(cur.get("brand_name").getAsString());
+                recHistory.setFoodId(cur.get("item_id").getAsString());
+                recHistory.setFoodName(cur.get("item_name").getAsString());
+                recHistory.setTimestamp(ZonedDateTime.now());
+                recHistory.setUser(u);
+                ret.add(recHistory);
+                hs.add(cur.get("brand_id").getAsString());
+            }
+            if(hs.size() >= n) break;
         }
         return ret;
     }
