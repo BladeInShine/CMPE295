@@ -37,18 +37,9 @@
                     {{recHistory.user.id}}
                 </td>
                 <td>
-                    <div fundoo-rating rating-value="rating" max="10" on-rating-selected="saveRatingToServer(rating)"></div>
-                    ReadOnly(test)<div fundoo-rating rating-value="rating" max="10" readonly="true"></div>
-                    <!--<div>-->
-                        <!--<div fundoo-rating rating-value="rating" max="10" on-rating-selected="saveRatingToServer(rating)"></div>-->
-                        <!--<div fundoo-rating rating="starRating1" read-only="false" max-rating="10" click="click1(param)"-->
-                             <!--mouse-hover="mouseHover1(param)" mouse-leave="mouseLeave1(param)">-->
-                        <!--</div>-->
-                        <!--<div>-->
-                            <!--<span class="label label-primary">Star Rating: {{starRating1}}</span>-->
-                            <!--<span class="label label-primary">Hover Rating: {{hoverRating1}}</span>-->
-                        <!--</div>-->
-                    <!--</div>-->
+                    <!--{{rating}}-->
+                    <span fundoo-rating rating-value="rating" max="5" on-rating-selected="saveRatingToServer(rating)"></span>
+                    <button id="upBtn" ng-hide="btnRated" ng-click="updateRating(rating, {id:recHistory.id})">update</button>
                 </td>
             </tr>
             </tbody>
