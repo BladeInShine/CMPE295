@@ -207,6 +207,22 @@ public class HistoryResource {
         return new ResponseEntity<String>(gson.toJson(ret), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/historys/date", method = RequestMethod.GET)
+    public ResponseEntity<List<History>> getHistoryByDate(@RequestParam String date){
+        String[] dateinfo = date.split("-");
+        int month = Integer.parseInt(dateinfo[0]);
+        int day = Integer.parseInt(dateinfo[1]);
+        int year = Integer.parseInt(dateinfo[2]);
+        List<History> userHistory = historyRepository.findByUserIsCurrentUser();
+        for(History history : userHistory){
+            if(history.getTime().getYear() != year || history.getTime().getMonthValue() != month || history.getTime().getDayOfMonth() != day)
+                continue;
+            else
+                userHistory.remove(history);
+        }
+        return new ResponseEntity<List<History>>(userHistory, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/historys/photo", method = RequestMethod.POST)
     public ResponseEntity<String> uploadPhoto(HttpServletRequest request) throws IOException {
         MultipartHttpServletRequest multipartHttpServletRequest = multipartResolver.resolveMultipart(request);
