@@ -2,7 +2,7 @@
 
 angular.module('cmpe295App')
     .factory('RecHistory', function ($resource, DateUtils) {
-        return $resource('api/recHistorys/user/:id', {}, {
+        return $resource('api/recHistorys/:id', {}, {
             'query': { method: 'GET', isArray: true},
             'get': {
                 method: 'GET',

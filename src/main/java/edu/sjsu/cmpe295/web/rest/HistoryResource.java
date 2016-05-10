@@ -101,7 +101,8 @@ public class HistoryResource {
     @Timed
     public List<History> getAllHistorys() {
         log.debug("REST request to get all Historys");
-        return historyRepository.findAll();
+        //return historyRepository.findAll();
+        return historyRepository.findByUserIsCurrentUser();
             }
 
     /**

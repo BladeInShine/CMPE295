@@ -81,7 +81,8 @@ public class RecHistoryResource {
     @Timed
     public List<RecHistory> getAllRecHistorys() {
         log.debug("REST request to get all RecHistorys");
-        return recHistoryRepository.findAll();
+        //return recHistoryRepository.findAll();
+        return recHistoryRepository.findByUserIsCurrentUser();
             }
 
     /**
