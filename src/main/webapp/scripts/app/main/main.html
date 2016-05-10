@@ -84,7 +84,7 @@ function drawGraph(dataPoints) {
 <h1 class="welcome">Healthy Food Recommander</h1>
 <br>
 <br>
-<div class="search">
+<div class="search" ng-show="usingRecommender==true" ng-hide="usingRecommender==false">
     <form action="/recommend/search" method="get">
         <input type="search" name="query" size="35">&nbsp&nbsp
         <input type="submit" class="btn btn-success" value="Search Foods">&nbsp&nbsp&nbsp&nbsp
