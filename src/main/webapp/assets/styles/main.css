@@ -81,14 +81,9 @@ Browser Upgrade Prompt
 .pad {
     padding: 20px;
 }
+
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
-@media
-only screen and (-webkit-min-device-pixel-ratio: 2),
-only screen and (   min--moz-device-pixel-ratio: 2),
-only screen and (     -o-min-device-pixel-ratio: 2/1),
-only screen and (        min-device-pixel-ratio: 2),
-only screen and (                min-resolution: 192dpi),
-only screen and (                min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (   min--moz-device-pixel-ratio: 2), only screen and (     -o-min-device-pixel-ratio: 2/1), only screen and (        min-device-pixel-ratio: 2), only screen and (                min-resolution: 192dpi), only screen and (                min-resolution: 2dppx) {
     .hipster {
         background: url("../images/hipster2x.png") no-repeat center top;
         background-size: contain;
@@ -118,10 +113,11 @@ only screen and (                min-resolution: 2dppx) {
 Custom alerts for notification
 ========================================================================== */
 
-.alerts .alert{
+.alerts .alert {
     text-overflow: ellipsis;
 }
-.alert pre{
+
+.alert pre {
     background: none;
     border: none;
     font: inherit;
@@ -163,38 +159,68 @@ Custom alerts for notification
 
 /* end of Custom alerts for notification */
 
-.voffset  { margin-top: 2px; }
-.voffset1 { margin-top: 5px; }
-.voffset2 { margin-top: 10px; }
-.voffset3 { margin-top: 15px; }
-.voffset4 { margin-top: 30px; }
-.voffset5 { margin-top: 40px; }
-.voffset6 { margin-top: 60px; }
-.voffset7 { margin-top: 80px; }
-.voffset8 { margin-top: 100px; }
-.voffset9 { margin-top: 150px; }
+.voffset {
+    margin-top: 2px;
+}
+
+.voffset1 {
+    margin-top: 5px;
+}
+
+.voffset2 {
+    margin-top: 10px;
+}
+
+.voffset3 {
+    margin-top: 15px;
+}
+
+.voffset4 {
+    margin-top: 30px;
+}
+
+.voffset5 {
+    margin-top: 40px;
+}
+
+.voffset6 {
+    margin-top: 60px;
+}
+
+.voffset7 {
+    margin-top: 80px;
+}
+
+.voffset8 {
+    margin-top: 100px;
+}
+
+.voffset9 {
+    margin-top: 150px;
+}
 
 /* start Password strength bar style */
 ul#strengthBar {
-    display:inline;
-    list-style:none;
-    margin:0;
-    margin-left:15px;
-    padding:0;
-    vertical-align:2px;
+    display: inline;
+    list-style: none;
+    margin: 0;
+    margin-left: 15px;
+    padding: 0;
+    vertical-align: 2px;
 }
 
 /*.point:last {*/
-    /*margin:0 !important;*/
+/*margin:0 !important;*/
 /*}*/
 .point {
-    background:#DDD;
-    border-radius:2px;
-    display:inline-block;
-    height:5px;
-    margin-right:1px;
-    width:20px;
+    background: #DDD;
+    border-radius: 2px;
+    display: inline-block;
+    height: 5px;
+    margin-right: 1px;
+    width: 20px;
 }
+
 /* end Password strength bar style */
 
 .readonly {
@@ -206,31 +232,48 @@ ul#strengthBar {
 
 /* Remove Bootstrap padding from the element
    http://stackoverflow.com/questions/19562903/remove-padding-from-columns-in-bootstrap-3 */
-.no-padding-left { padding-left: 0 !important; }
-.no-padding-right { padding-right: 0 !important; }
-.no-padding-top { padding-top: 0 !important; }
-.no-padding-bottom { padding-bottom: 0 !important; }
-.no-padding { padding: 0 !important; }
+.no-padding-left {
+    padding-left: 0 !important;
+}
+
+.no-padding-right {
+    padding-right: 0 !important;
+}
+
+.no-padding-top {
+    padding-top: 0 !important;
+}
+
+.no-padding-bottom {
+    padding-bottom: 0 !important;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
 
 /* bootstrap 3 input-group 100% width
    http://stackoverflow.com/questions/23436430/bootstrap-3-input-group-100-width */
-.width-min { width: 1% !important; }
+.width-min {
+    width: 1% !important;
+}
 
 /* Makes toolbar not wrap on smaller screens
  http://www.sketchingwithcss.com/samplechapter/cheatsheet.html#right */
 .flex-btn-group-container {
-   display: -webkit-flex;
-   display: flex;
-   -webkit-flex-direction: row;
-   flex-direction: row;
-   -webkit-justify-content: flex-end;
-   justify-content: flex-end;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
 }
 
 /* Align text in td verifically (top aligned by Bootstrap) */
 .jh-table > tbody > tr > td {
     vertical-align: middle;
 }
+
 /* end of entity tables helpers */
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */
@@ -241,14 +284,15 @@ ul#strengthBar {
     padding-bottom: 55px;;
 }
 
-h1{
+h1 {
     text-align: center;
     color: #3ec303;
 }
+
 /*#loginPanel {*/
-    /*width: 600px;*/
-    /*!*height: 300px;*!*/
-    /*margin: -70px auto;*/
+/*width: 600px;*/
+/*!*height: 300px;*!*/
+/*margin: -70px auto;*/
 /*}*/
 .description {
     height: 300px;
@@ -258,13 +302,15 @@ h1{
 }
 
 table {
-  border: 2px solid #bdbdbd;
+    border: 2px solid #bdbdbd;
 
 }
+
 th, td {
     padding: 10px;
     text-align: center;
 }
+
 th {
     background: #A9E2F3;
 }
@@ -280,6 +326,7 @@ th {
 .searchbox {
     size: 35
 }
+
 #upBtn:active {
     -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
     -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
@@ -289,9 +336,13 @@ th {
 }
 
 #upBtn {
-    -webkit-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+* {
+    font-family: Calibri;
 }
 
